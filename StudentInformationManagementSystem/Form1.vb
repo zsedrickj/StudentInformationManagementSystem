@@ -28,4 +28,10 @@ Public Class Form1
         ' Bind the DataTable to the DataGridView
         DataGridViewStudents.DataSource = studentsDataTable
     End Sub
+
+    Private Sub btnCreate_Click(sender As Object, e As EventArgs) Handles btnCreate.Click
+        Dim addStudent As New AddStudent()
+        addStudent.Show()
+        Me.Hide()
+    End Sub
 End Class

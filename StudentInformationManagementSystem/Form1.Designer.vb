@@ -40,7 +40,7 @@ Partial Class Form1
         ' 
         ' Panel1
         ' 
-        Panel1.BackColor = Color.FromArgb(CByte(24), CByte(30), CByte(54))
+        Panel1.BackColor = Color.FromArgb(CByte(202), CByte(220), CByte(252))
         Panel1.Controls.Add(btnExit)
         Panel1.Controls.Add(btnDelete)
         Panel1.Controls.Add(btnUpdate)
@@ -175,9 +175,9 @@ Partial Class Form1
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(9F, 23F)
+        AutoScaleDimensions = New SizeF(9.0F, 23.0F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.FromArgb(CByte(46), CByte(51), CByte(73))
+        BackColor = Color.FromArgb(CByte(0), CByte(36), CByte(107))
         ClientSize = New Size(1070, 664)
         Controls.Add(Panel1)
         Font = New Font("Nirmala UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))

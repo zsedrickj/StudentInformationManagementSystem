@@ -40,7 +40,7 @@ Partial Class Form1
         ' 
         ' Panel1
         ' 
-        Panel1.BackColor = Color.FromArgb(CByte(24), CByte(30), CByte(54))
+        Panel1.BackColor = Color.FromArgb(CByte(202), CByte(220), CByte(252))
         Panel1.Controls.Add(btnExit)
         Panel1.Controls.Add(btnDelete)
         Panel1.Controls.Add(btnUpdate)
@@ -59,7 +59,7 @@ Partial Class Form1
         btnExit.FlatAppearance.BorderSize = 0
         btnExit.FlatStyle = FlatStyle.Flat
         btnExit.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnExit.ForeColor = Color.FromArgb(CByte(0), CByte(126), CByte(249))
+        btnExit.ForeColor = Color.FromArgb(CByte(0), CByte(36), CByte(107))
         btnExit.Image = CType(resources.GetObject("btnExit.Image"), Image)
         btnExit.Location = New Point(0, 622)
         btnExit.Name = "btnExit"
@@ -75,7 +75,7 @@ Partial Class Form1
         btnDelete.FlatAppearance.BorderSize = 0
         btnDelete.FlatStyle = FlatStyle.Flat
         btnDelete.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDelete.ForeColor = Color.FromArgb(CByte(0), CByte(126), CByte(249))
+        btnDelete.ForeColor = Color.FromArgb(CByte(0), CByte(36), CByte(107))
         btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), Image)
         btnDelete.Location = New Point(0, 292)
         btnDelete.Name = "btnDelete"
@@ -91,7 +91,7 @@ Partial Class Form1
         btnUpdate.FlatAppearance.BorderSize = 0
         btnUpdate.FlatStyle = FlatStyle.Flat
         btnUpdate.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnUpdate.ForeColor = Color.FromArgb(CByte(0), CByte(126), CByte(249))
+        btnUpdate.ForeColor = Color.FromArgb(CByte(0), CByte(36), CByte(107))
         btnUpdate.Image = CType(resources.GetObject("btnUpdate.Image"), Image)
         btnUpdate.Location = New Point(0, 250)
         btnUpdate.Name = "btnUpdate"
@@ -107,7 +107,7 @@ Partial Class Form1
         btnCreate.FlatAppearance.BorderSize = 0
         btnCreate.FlatStyle = FlatStyle.Flat
         btnCreate.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnCreate.ForeColor = Color.FromArgb(CByte(0), CByte(126), CByte(249))
+        btnCreate.ForeColor = Color.FromArgb(CByte(0), CByte(36), CByte(107))
         btnCreate.Image = CType(resources.GetObject("btnCreate.Image"), Image)
         btnCreate.Location = New Point(0, 208)
         btnCreate.Name = "btnCreate"
@@ -123,7 +123,7 @@ Partial Class Form1
         btnStudentEnrollemntForm.FlatAppearance.BorderSize = 0
         btnStudentEnrollemntForm.FlatStyle = FlatStyle.Flat
         btnStudentEnrollemntForm.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnStudentEnrollemntForm.ForeColor = Color.FromArgb(CByte(0), CByte(126), CByte(249))
+        btnStudentEnrollemntForm.ForeColor = Color.FromArgb(CByte(0), CByte(36), CByte(107))
         btnStudentEnrollemntForm.Image = CType(resources.GetObject("btnStudentEnrollemntForm.Image"), Image)
         btnStudentEnrollemntForm.Location = New Point(0, 166)
         btnStudentEnrollemntForm.Name = "btnStudentEnrollemntForm"
@@ -156,7 +156,7 @@ Partial Class Form1
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.ForeColor = Color.White
+        Label1.ForeColor = Color.FromArgb(CByte(0), CByte(36), CByte(107))
         Label1.Location = New Point(12, 117)
         Label1.Name = "Label1"
         Label1.Size = New Size(185, 20)
@@ -177,7 +177,7 @@ Partial Class Form1
         ' 
         AutoScaleDimensions = New SizeF(9F, 23F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.FromArgb(CByte(46), CByte(51), CByte(73))
+        BackColor = Color.FromArgb(CByte(0), CByte(36), CByte(107))
         ClientSize = New Size(1070, 664)
         Controls.Add(Panel1)
         Font = New Font("Nirmala UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))

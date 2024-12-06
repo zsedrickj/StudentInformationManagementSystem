@@ -12,14 +12,19 @@ Namespace BAL
         Public Function InsertStudent(student As Students) As Integer
             Dim cmd As New MySqlCommand()
             cmd.CommandType = CommandType.Text
-            cmd.CommandText = "INSERT INTO Students (FirstName, LastName, DateOfBirth, ContactInfo, GPA) VALUES (@FirstName, @LastName, @DateOfBirth, @ContactInfo, @GPA)"
+            cmd.CommandText = "INSERT INTO Students (first_name, last_name, email, phone_number, dob, gender, address, enrollment_date, program_id) " &
+                      "VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @DateOfBirth, @Gender, @Address, @EnrollmentDate, @ProgramId)"
 
             ' Add parameters to prevent SQL injection
             cmd.Parameters.AddWithValue("@FirstName", student.FirstName)
             cmd.Parameters.AddWithValue("@LastName", student.LastName)
+            cmd.Parameters.AddWithValue("@Email", student.Email)
+            cmd.Parameters.AddWithValue("@PhoneNumber", student.PhoneNumber)
             cmd.Parameters.AddWithValue("@DateOfBirth", student.DateOfBirth)
-            cmd.Parameters.AddWithValue("@ContactInfo", student.ContactInfo)
-            cmd.Parameters.AddWithValue("@GPA", student.GPA)
+            cmd.Parameters.AddWithValue("@Gender", student.Gender)
+            cmd.Parameters.AddWithValue("@Address", student.Address)
+            cmd.Parameters.AddWithValue("@EnrollmentDate", student.EnrollmentDate)
+            cmd.Parameters.AddWithValue("@ProgramId", student.ProgramId)
 
             ' Execute the command and return the number of affected rows
             Return db.ExeNonQuery(cmd)
@@ -39,15 +44,21 @@ Namespace BAL
         Public Function UpdateStudent(student As Students) As Integer
             Dim cmd As New MySqlCommand()
             cmd.CommandType = CommandType.Text
-            cmd.CommandText = "UPDATE Students SET FirstName = @FirstName, LastName = @LastName, DateOfBirth = @DateOfBirth, ContactInfo = @ContactInfo, GPA = @GPA WHERE StudentID = @StudentID"
+            cmd.CommandText = "UPDATE Students SET first_name = @FirstName, last_name = @LastName, email = @Email, phone_number = @PhoneNumber, " &
+                      "dob = @DateOfBirth, gender = @Gender, address = @Address, enrollment_date = @EnrollmentDate, program_id = @ProgramId " &
+                      "WHERE student_id = @StudentID"
 
             ' Add parameters to prevent SQL injection
             cmd.Parameters.AddWithValue("@FirstName", student.FirstName)
             cmd.Parameters.AddWithValue("@LastName", student.LastName)
+            cmd.Parameters.AddWithValue("@Email", student.Email)
+            cmd.Parameters.AddWithValue("@PhoneNumber", student.PhoneNumber)
             cmd.Parameters.AddWithValue("@DateOfBirth", student.DateOfBirth)
-            cmd.Parameters.AddWithValue("@ContactInfo", student.ContactInfo)
-            cmd.Parameters.AddWithValue("@GPA", student.GPA)
-            cmd.Parameters.AddWithValue("@StudentID", student.StudentID)
+            cmd.Parameters.AddWithValue("@Gender", student.Gender)
+            cmd.Parameters.AddWithValue("@Address", student.Address)
+            cmd.Parameters.AddWithValue("@EnrollmentDate", student.EnrollmentDate)
+            cmd.Parameters.AddWithValue("@ProgramId", student.ProgramId)
+            cmd.Parameters.AddWithValue("@StudentID", student.StudentId)
 
             ' Execute the command and return the number of affected rows
             Return db.ExeNonQuery(cmd)

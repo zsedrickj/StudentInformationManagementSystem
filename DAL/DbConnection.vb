@@ -2,7 +2,7 @@ Imports System.Data
 Imports MySql.Data.MySqlClient
 
 Public Class DbConnection
-    Public con As New MySqlConnection("SERVER=localhost; DATABASE=StudentManagement; UID=root; PASSWORD=allenjavier_03;")
+    Public con As New MySqlConnection("SERVER=localhost; DATABASE=studentinformationmanagementsystem; UID=root; PASSWORD=allenjavier_03;")
 
     Public Function getcon() As MySqlConnection
         If con.State = ConnectionState.Closed Then

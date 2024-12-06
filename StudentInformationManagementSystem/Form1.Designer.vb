@@ -28,17 +28,14 @@ Partial Class Form1
         btnDelete = New Button()
         btnUpdate = New Button()
         btnCreate = New Button()
-        btnDashBoard = New Button()
+        btnStudentEnrollemntForm = New Button()
         Panel2 = New Panel()
         pnlNav = New Panel()
         Label1 = New Label()
         PictureBox1 = New PictureBox()
-        Label2 = New Label()
-        DataGridViewStudents = New DataGridView()
         Panel1.SuspendLayout()
         Panel2.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
-        CType(DataGridViewStudents, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Panel1
@@ -48,7 +45,7 @@ Partial Class Form1
         Panel1.Controls.Add(btnDelete)
         Panel1.Controls.Add(btnUpdate)
         Panel1.Controls.Add(btnCreate)
-        Panel1.Controls.Add(btnDashBoard)
+        Panel1.Controls.Add(btnStudentEnrollemntForm)
         Panel1.Controls.Add(Panel2)
         Panel1.Dock = DockStyle.Left
         Panel1.Location = New Point(0, 0)
@@ -120,21 +117,21 @@ Partial Class Form1
         btnCreate.TextImageRelation = TextImageRelation.TextBeforeImage
         btnCreate.UseVisualStyleBackColor = True
         ' 
-        ' btnDashBoard
+        ' btnStudentEnrollemntForm
         ' 
-        btnDashBoard.Dock = DockStyle.Top
-        btnDashBoard.FlatAppearance.BorderSize = 0
-        btnDashBoard.FlatStyle = FlatStyle.Flat
-        btnDashBoard.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDashBoard.ForeColor = Color.FromArgb(CByte(0), CByte(126), CByte(249))
-        btnDashBoard.Image = CType(resources.GetObject("btnDashBoard.Image"), Image)
-        btnDashBoard.Location = New Point(0, 166)
-        btnDashBoard.Name = "btnDashBoard"
-        btnDashBoard.Size = New Size(209, 42)
-        btnDashBoard.TabIndex = 1
-        btnDashBoard.Text = "Dashboard"
-        btnDashBoard.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnDashBoard.UseVisualStyleBackColor = True
+        btnStudentEnrollemntForm.Dock = DockStyle.Top
+        btnStudentEnrollemntForm.FlatAppearance.BorderSize = 0
+        btnStudentEnrollemntForm.FlatStyle = FlatStyle.Flat
+        btnStudentEnrollemntForm.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnStudentEnrollemntForm.ForeColor = Color.FromArgb(CByte(0), CByte(126), CByte(249))
+        btnStudentEnrollemntForm.Image = CType(resources.GetObject("btnStudentEnrollemntForm.Image"), Image)
+        btnStudentEnrollemntForm.Location = New Point(0, 166)
+        btnStudentEnrollemntForm.Name = "btnStudentEnrollemntForm"
+        btnStudentEnrollemntForm.Size = New Size(209, 42)
+        btnStudentEnrollemntForm.TabIndex = 1
+        btnStudentEnrollemntForm.Text = "Student Enrollment"
+        btnStudentEnrollemntForm.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnStudentEnrollemntForm.UseVisualStyleBackColor = True
         ' 
         ' Panel2
         ' 
@@ -176,34 +173,12 @@ Partial Class Form1
         PictureBox1.TabIndex = 0
         PictureBox1.TabStop = False
         ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.Font = New Font("Microsoft Sans Serif", 21F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.ForeColor = Color.FromArgb(CByte(158), CByte(161), CByte(176))
-        Label2.Location = New Point(227, 25)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(195, 39)
-        Label2.TabIndex = 1
-        Label2.Text = "Dashboard"
-        ' 
-        ' DataGridViewStudents
-        ' 
-        DataGridViewStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewStudents.Location = New Point(254, 117)
-        DataGridViewStudents.Name = "DataGridViewStudents"
-        DataGridViewStudents.RowHeadersWidth = 51
-        DataGridViewStudents.Size = New Size(780, 454)
-        DataGridViewStudents.TabIndex = 2
-        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(9F, 23F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(46), CByte(51), CByte(73))
         ClientSize = New Size(1070, 664)
-        Controls.Add(DataGridViewStudents)
-        Controls.Add(Label2)
         Controls.Add(Panel1)
         Font = New Font("Nirmala UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FormBorderStyle = FormBorderStyle.None
@@ -214,22 +189,18 @@ Partial Class Form1
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
-        CType(DataGridViewStudents, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
-        PerformLayout()
     End Sub
 
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents btnDashBoard As Button
+    Friend WithEvents btnStudentEnrollemntForm As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnCreate As Button
     Friend WithEvents btnExit As Button
     Friend WithEvents pnlNav As Panel
-    Friend WithEvents Label2 As Label
-    Friend WithEvents DataGridViewStudents As DataGridView
 
 End Class

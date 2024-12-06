@@ -1,9 +1,14 @@
 Public Class Students
-    Public Property StudentID As Integer ' Corresponds to Students table
+    Public Property StudentId As Integer
     Public Property FirstName As String
     Public Property LastName As String
-    Public Property DateOfBirth As DateTime
-    Public Property ContactInfo As String
-    Public Property GPA As Decimal
+    Public Property Email As String
+    Public Property PhoneNumber As String
+    Public Property DateOfBirth As Date
+    Public Property Gender As String
+    Public Property Address As String
+    Public Property EnrollmentDate As Date
+    Public Property ProgramId As Integer
+
 
 End Class

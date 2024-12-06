@@ -167,18 +167,15 @@
         ocgW/+O7a5/dAUOh+2lCiadLAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnDashBoard.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnStudentEnrollemntForm.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAeBJREFUSEu1
-        lrFKQzEUhoWu3Tp2FRx9BQdBKB2K7yH4Hn0GXZwU3FyK4Ci4FhdHUSkoIihWhWI8321OSHpP4q3YwE96
-        k5PzJScnSdd29vuNtHFy2xZ1RF1fty07S2ajyjveFg1FI9F1JL5p74mKQLNRBrX8YBy9i1xB9F+IBqKW
-        5a/WIIbMnhm+iSynOQFjXGfRZ/IhBgAORJYTt36c1hkdiRJQDCBEzMQaWDnePZ+4w5vXqv4FhJ8QuhjC
-        HmRDtHf55CbTmaNQ823ZeRG6QQKRBsLEJifGzHbz9M4Nxy8BQJl9z0U7/ZlVkQxV1imENE2ySAGEB4eL
-        RUH0Z0Afol4MSfaCAVtnD250P/UuywU77A3QsILIjyRUGLKxV4+f3kWzMn7+shKiChkQrghOcIDkQlQq
-        Gjr144XfLhDuogBBLJ1NbQrCDnvGxX5EAZKsBLEaUjSGaNqqCI8W7Ggz9iRAaulrQXCqWUQd71kBMt+T
-        XHblIPQvAZlnl4ck5+SfILVzUktjBsWlBKEYkPTEe1C4uzAm5zlkKj3Z9FPzHfcvnJH63eUhxVt4Sdm3
-        sAcV35OGyr8nSDpZDSBmspqXUSWGwHiz2bzkdjZEFmHX/I2PJYNY1Wr+rVjCkegP/7v6az+wi/KwipjY
-        7wAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAE9SURBVEhLvZaxboMwEIZ5DoZIfYdIvAFZ8iiV6MuUNe+QKWP2duzQJQNDp4xp1RapIvdZNjLm
+        EIjKHj45nO/+P4dtINs97Sd5qG+5UAlHoRFaobMj18SZz7V6hxqkyBa/CU54CubJmzQbBSSxEM6CJjgH
+        dUWoObiQhFK42IK1UF/6ur4BHcwabJ71eAA6fUfOgDVYdIu2h081roCeWSNnwqJpiT108Hj66t6vv2Zc
+        2FFlTOQHXbA7tKQeROvX7677a8240ATd3HUxt03XmqBbYcKB0hIGrDSBIyac3NEkIiGhSYimIzSYqLeK
+        xUXM5+Xjx5gwhnPkazpCi8kgyD9im7KLEFwK+dRpHSXrJMmaJNldSc5J/BOf5NllTeI/ha1R3PeJZxT3
+        zeiQhLjveIckxv1a8aHIFv/ju2uf3QFDoftpQomnSwAAAABJRU5ErkJggg==
 </value>
   </data>
 </root>

@@ -19,6 +19,7 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25))
         LoadStudents()
+
     End Sub
 
     Private Sub LoadStudents()
@@ -26,7 +27,7 @@ Public Class Form1
         Dim studentsDataTable As DataTable = studentDataAccess.ViewStudents()
 
         ' Bind the DataTable to the DataGridView
-        DataGridViewStudents.DataSource = studentsDataTable
+
     End Sub
 
     Private Sub btnCreate_Click(sender As Object, e As EventArgs) Handles btnCreate.Click
@@ -34,4 +35,20 @@ Public Class Form1
         addStudent.Show()
         Me.Hide()
     End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Const message As String = "Are you sure that you would like to close the form?"
+        Const caption As String = "Exit"
+        Dim result As DialogResult = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        ' If the No button was pressed, do nothing
+        If result = DialogResult.No Then
+            Return ' Exit the method to prevent closing
+        End If
+
+        ' Otherwise, close the application
+        Application.Exit()
+    End Sub
+
+
 End Class

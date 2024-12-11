@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form1
+Partial Class CourseEnrollment
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -26,7 +26,7 @@ Partial Class Form1
         btnExit = New Button()
         btnDelete = New Button()
         btnUpdate = New Button()
-        btnCreate = New Button()
+        btnStudentEnrollment = New Button()
         Label1 = New Label()
         PictureBox1 = New PictureBox()
         Panel2 = New Panel()
@@ -35,29 +35,12 @@ Partial Class Form1
         pnlNav = New Panel()
         Panel1 = New Panel()
         Panel3 = New Panel()
-        Label7 = New Label()
-        Label6 = New Label()
-        Label5 = New Label()
-        Label4 = New Label()
-        Label3 = New Label()
-        Label2 = New Label()
-        TextBox6 = New TextBox()
-        TextBox5 = New TextBox()
-        TextBox4 = New TextBox()
-        TextBox3 = New TextBox()
-        TextBox2 = New TextBox()
-        TextBox1 = New TextBox()
         Panel4 = New Panel()
         Label8 = New Label()
         MySqlCommand1 = New MySql.Data.MySqlClient.MySqlCommand()
-        DateTimePicker1 = New DateTimePicker()
-        Label10 = New Label()
-        Label11 = New Label()
-        DateTimePicker2 = New DateTimePicker()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
         Panel1.SuspendLayout()
-        Panel3.SuspendLayout()
         Panel4.SuspendLayout()
         SuspendLayout()
         ' 
@@ -123,22 +106,22 @@ Partial Class Form1
         btnUpdate.TextImageRelation = TextImageRelation.TextBeforeImage
         btnUpdate.UseVisualStyleBackColor = True
         ' 
-        ' btnCreate
+        ' btnStudentEnrollment
         ' 
-        btnCreate.BackColor = Color.FromArgb(CByte(36), CByte(41), CByte(62))
-        btnCreate.Cursor = Cursors.Hand
-        btnCreate.Dock = DockStyle.Top
-        btnCreate.FlatAppearance.BorderSize = 0
-        btnCreate.FlatStyle = FlatStyle.Flat
-        btnCreate.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnCreate.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        btnCreate.Location = New Point(0, 145)
-        btnCreate.Name = "btnCreate"
-        btnCreate.Size = New Size(249, 37)
-        btnCreate.TabIndex = 1
-        btnCreate.Text = "Student Enrollment"
-        btnCreate.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnCreate.UseVisualStyleBackColor = False
+        btnStudentEnrollment.BackColor = Color.FromArgb(CByte(36), CByte(41), CByte(62))
+        btnStudentEnrollment.Cursor = Cursors.Hand
+        btnStudentEnrollment.Dock = DockStyle.Top
+        btnStudentEnrollment.FlatAppearance.BorderSize = 0
+        btnStudentEnrollment.FlatStyle = FlatStyle.Flat
+        btnStudentEnrollment.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnStudentEnrollment.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        btnStudentEnrollment.Location = New Point(0, 145)
+        btnStudentEnrollment.Name = "btnStudentEnrollment"
+        btnStudentEnrollment.Size = New Size(249, 37)
+        btnStudentEnrollment.TabIndex = 1
+        btnStudentEnrollment.Text = "Student Enrollment"
+        btnStudentEnrollment.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnStudentEnrollment.UseVisualStyleBackColor = False
         ' 
         ' Label1
         ' 
@@ -211,7 +194,7 @@ Partial Class Form1
         Panel1.Controls.Add(btnExit)
         Panel1.Controls.Add(btnDelete)
         Panel1.Controls.Add(btnUpdate)
-        Panel1.Controls.Add(btnCreate)
+        Panel1.Controls.Add(btnStudentEnrollment)
         Panel1.Controls.Add(Panel2)
         Panel1.Location = New Point(31, 22)
         Panel1.Name = "Panel1"
@@ -222,134 +205,10 @@ Partial Class Form1
         ' 
         Panel3.BackColor = Color.FromArgb(CByte(44), CByte(53), CByte(79))
         Panel3.BorderStyle = BorderStyle.Fixed3D
-        Panel3.Controls.Add(DateTimePicker2)
-        Panel3.Controls.Add(Label11)
-        Panel3.Controls.Add(Label10)
-        Panel3.Controls.Add(DateTimePicker1)
-        Panel3.Controls.Add(Label7)
-        Panel3.Controls.Add(Label6)
-        Panel3.Controls.Add(Label5)
-        Panel3.Controls.Add(Label4)
-        Panel3.Controls.Add(Label3)
-        Panel3.Controls.Add(Label2)
-        Panel3.Controls.Add(TextBox6)
-        Panel3.Controls.Add(TextBox5)
-        Panel3.Controls.Add(TextBox4)
-        Panel3.Controls.Add(TextBox3)
-        Panel3.Controls.Add(TextBox2)
-        Panel3.Controls.Add(TextBox1)
         Panel3.Location = New Point(316, 126)
         Panel3.Name = "Panel3"
         Panel3.Size = New Size(772, 397)
         Panel3.TabIndex = 1
-        ' 
-        ' Label7
-        ' 
-        Label7.AutoSize = True
-        Label7.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label7.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label7.Location = New Point(436, 111)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(71, 20)
-        Label7.TabIndex = 12
-        Label7.Text = "Address"
-        ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label6.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label6.Location = New Point(436, 55)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(64, 20)
-        Label6.TabIndex = 11
-        Label6.Text = "Gender"
-        ' 
-        ' Label5
-        ' 
-        Label5.AutoSize = True
-        Label5.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label5.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label5.Location = New Point(82, 216)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(120, 20)
-        Label5.TabIndex = 10
-        Label5.Text = "Phone Number"
-        ' 
-        ' Label4
-        ' 
-        Label4.AutoSize = True
-        Label4.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label4.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label4.Location = New Point(82, 161)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(51, 20)
-        Label4.TabIndex = 9
-        Label4.Text = "Email"
-        ' 
-        ' Label3
-        ' 
-        Label3.AutoSize = True
-        Label3.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label3.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label3.Location = New Point(82, 110)
-        Label3.Name = "Label3"
-        Label3.Size = New Size(91, 20)
-        Label3.TabIndex = 8
-        Label3.Text = "Last Name"
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label2.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label2.Location = New Point(82, 55)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(92, 20)
-        Label2.TabIndex = 7
-        Label2.Text = "First Name"
-        ' 
-        ' TextBox6
-        ' 
-        TextBox6.Location = New Point(436, 132)
-        TextBox6.Name = "TextBox6"
-        TextBox6.Size = New Size(267, 27)
-        TextBox6.TabIndex = 6
-        ' 
-        ' TextBox5
-        ' 
-        TextBox5.Location = New Point(436, 81)
-        TextBox5.Name = "TextBox5"
-        TextBox5.Size = New Size(267, 27)
-        TextBox5.TabIndex = 5
-        ' 
-        ' TextBox4
-        ' 
-        TextBox4.Location = New Point(82, 238)
-        TextBox4.Name = "TextBox4"
-        TextBox4.Size = New Size(267, 27)
-        TextBox4.TabIndex = 4
-        ' 
-        ' TextBox3
-        ' 
-        TextBox3.Location = New Point(82, 183)
-        TextBox3.Name = "TextBox3"
-        TextBox3.Size = New Size(267, 27)
-        TextBox3.TabIndex = 3
-        ' 
-        ' TextBox2
-        ' 
-        TextBox2.Location = New Point(82, 132)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(267, 27)
-        TextBox2.TabIndex = 2
-        ' 
-        ' TextBox1
-        ' 
-        TextBox1.Location = New Point(82, 81)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(267, 27)
-        TextBox1.TabIndex = 0
         ' 
         ' Panel4
         ' 
@@ -379,43 +238,7 @@ Partial Class Form1
         MySqlCommand1.EnableCaching = False
         MySqlCommand1.Transaction = Nothing
         ' 
-        ' DateTimePicker1
-        ' 
-        DateTimePicker1.Location = New Point(82, 297)
-        DateTimePicker1.Name = "DateTimePicker1"
-        DateTimePicker1.Size = New Size(267, 27)
-        DateTimePicker1.TabIndex = 13
-        ' 
-        ' Label10
-        ' 
-        Label10.AutoSize = True
-        Label10.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label10.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label10.Location = New Point(82, 274)
-        Label10.Name = "Label10"
-        Label10.Size = New Size(71, 20)
-        Label10.TabIndex = 14
-        Label10.Text = "Birthday"
-        ' 
-        ' Label11
-        ' 
-        Label11.AutoSize = True
-        Label11.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label11.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label11.Location = New Point(436, 162)
-        Label11.Name = "Label11"
-        Label11.Size = New Size(130, 20)
-        Label11.TabIndex = 15
-        Label11.Text = "Enrollment Date"
-        ' 
-        ' DateTimePicker2
-        ' 
-        DateTimePicker2.Location = New Point(436, 185)
-        DateTimePicker2.Name = "DateTimePicker2"
-        DateTimePicker2.Size = New Size(267, 27)
-        DateTimePicker2.TabIndex = 16
-        ' 
-        ' Form1
+        ' CourseEnrollment
         ' 
         AutoScaleDimensions = New SizeF(10F, 20F)
         AutoScaleMode = AutoScaleMode.Font
@@ -426,7 +249,7 @@ Partial Class Form1
         Controls.Add(Panel4)
         Font = New Font("Microsoft Sans Serif", 10.2F)
         FormBorderStyle = FormBorderStyle.None
-        Name = "Form1"
+        Name = "CourseEnrollment"
         ShowInTaskbar = False
         StartPosition = FormStartPosition.CenterScreen
         Text = "Student Information Management System"
@@ -434,8 +257,6 @@ Partial Class Form1
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
         Panel1.ResumeLayout(False)
-        Panel3.ResumeLayout(False)
-        Panel3.PerformLayout()
         Panel4.ResumeLayout(False)
         Panel4.PerformLayout()
         ResumeLayout(False)
@@ -444,33 +265,17 @@ Partial Class Form1
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnCreate As Button
+    Friend WithEvents btnStudentEnrollment As Button
     Friend WithEvents btnExit As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents pnlNav As Panel
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents lbl_userName As Label
     Friend WithEvents MySqlCommand1 As MySql.Data.MySqlClient.MySqlCommand
-    Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents Label10 As Label
-    Friend WithEvents DateTimePicker2 As DateTimePicker
-    Friend WithEvents Label11 As Label
 
 End Class

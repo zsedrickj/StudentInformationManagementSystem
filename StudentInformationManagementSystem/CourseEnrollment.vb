@@ -2,9 +2,8 @@
 Imports BEL
 Imports BAL
 Imports BAL.BAL
-Public Class Form1
-    Public opr As New StudentDataAccess()
-    Public info As New Students()
+Public Class CourseEnrollment
+    Private student As Students
 
     <DllImport("Gdi32.dll", EntryPoint:="CreateRoundRectRgn")>
     Private Shared Function CreateRoundRectRgn(
@@ -16,7 +15,12 @@ Public Class Form1
     ByVal nHeightEllipse As Integer
 ) As IntPtr
     End Function
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub New(existingStudent As Students)
+        InitializeComponent()
+        student = existingStudent
+        ' Initialize with existing student data
+    End Sub
+    Private Sub CourseEnrollment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25))
         LoadStudents()
         Me.StartPosition = FormStartPosition.Manual
@@ -34,11 +38,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btnCreate_Click(sender As Object, e As EventArgs) Handles btnCreate.Click
-        Dim addStudent As New AddStudent()
-        addStudent.Show()
-        Me.Hide()
-    End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Const message As String = "Are you sure that you would like to close the form?"
@@ -62,5 +61,10 @@ Public Class Form1
 
     End Sub
 
+    Private Sub btnStudentEnrollment_Click(sender As Object, e As EventArgs) Handles btnStudentEnrollment.Click
+        Dim studentEnrollment As New StudentEnrollment
+        studentEnrollment.Show()
+        Me.Hide()
 
+    End Sub
 End Class

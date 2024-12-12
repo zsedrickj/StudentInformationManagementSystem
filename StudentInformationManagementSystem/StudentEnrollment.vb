@@ -2,6 +2,7 @@
 Imports BEL
 Imports BAL
 Imports BAL.BAL
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 Public Class StudentEnrollment
     Public opr As New StudentDataAccess()
     Private student As Students
@@ -30,10 +31,10 @@ Public Class StudentEnrollment
     End Function
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25))
-        LoadStudents()
         Me.StartPosition = FormStartPosition.Manual
         Me.Location = New Point((Screen.PrimaryScreen.WorkingArea.Width - Me.Width) / 2, (Screen.PrimaryScreen.WorkingArea.Height - Me.Height) / 2)
         IsNullOrEmpty()
+        GetUserName()
         cmbGender.Items.Add("Male")
         cmbGender.Items.Add("Female")
         cmbGender.SelectedIndex = 0
@@ -98,10 +99,24 @@ Public Class StudentEnrollment
         End If
 
     End Sub
-    Private Sub LoadStudents()
-        Dim studentDataAccess As New StudentDataAccess()
-        ' Bind the DataTable to the DataGridView
+    Public Sub GetUserName()
+        ' Get the username input from the Login form
+        Dim loggedInUserName As String = Login.UserNameInput.Trim() ' Assuming Login is the current instance
 
+        ' Create an instance of UserDataAccess
+        Dim userAccess As New UserDataAccess()
+
+        ' Fetch user data based on the username
+        Dim userTable As DataTable = userAccess.GetUser(loggedInUserName)
+
+        ' Check if user data is retrieved
+        If userTable IsNot Nothing AndAlso userTable.Rows.Count > 0 Then
+            ' Update the label with the username
+            lbl_userName.Text = "Welcome " & userTable.Rows(0)("username").ToString() & "!"
+        Else
+            ' Handle case where no user data is found
+            lbl_userName.Text = "User not found!"
+        End If
     End Sub
 
 

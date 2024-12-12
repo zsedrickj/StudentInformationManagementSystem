@@ -4,7 +4,14 @@ Imports BAL
 Imports BAL.BAL
 Public Class Login
 
-
+    Public Property UserNameInput As String
+        Get
+            Return txtUser.Text
+        End Get
+        Set(value As String)
+            txtUser.Text = value
+        End Set
+    End Property
 
 
     <DllImport("Gdi32.dll", EntryPoint:="CreateRoundRectRgn")>
@@ -53,6 +60,7 @@ Public Class Login
         ' Validate user
         If userTable IsNot Nothing AndAlso userTable.Rows.Count > 0 Then
             ' Login successful
+
             MessageBox.Show("Login successful!", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             ' Redirect to the main form or perform the next action

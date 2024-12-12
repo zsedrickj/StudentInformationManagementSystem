@@ -77,6 +77,17 @@ Namespace BAL
             ' Execute the command and return the result as a DataTable
             Return db.ExeReader(cmd)
         End Function
+
+        Public Function GetUser(username As String) As DataTable
+            Dim cmd As New MySqlCommand
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "SELECT * FROM Users WHERE LOWER(username) = LOWER(@Username)"
+
+            cmd.Parameters.AddWithValue("@Username", username)
+
+            ' Execute the query and return the result as a DataTable
+            Return db.ExeReader(cmd)
+        End Function
     End Class
 End Namespace
 

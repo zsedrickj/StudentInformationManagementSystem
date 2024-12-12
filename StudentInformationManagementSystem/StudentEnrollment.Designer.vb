@@ -35,6 +35,9 @@ Partial Class StudentEnrollment
         pnlNav = New Panel()
         Panel1 = New Panel()
         Panel3 = New Panel()
+        cmbProgram = New ComboBox()
+        Label12 = New Label()
+        cmbGender = New ComboBox()
         dtpEnrollmentDate = New DateTimePicker()
         Label11 = New Label()
         Label10 = New Label()
@@ -53,9 +56,8 @@ Partial Class StudentEnrollment
         Panel4 = New Panel()
         Label8 = New Label()
         MySqlCommand1 = New MySql.Data.MySqlClient.MySqlCommand()
-        cmbGender = New ComboBox()
-        Label12 = New Label()
-        cmbProgram = New ComboBox()
+        Label13 = New Label()
+        ComboBox1 = New ComboBox()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
         Panel1.SuspendLayout()
@@ -224,6 +226,8 @@ Partial Class StudentEnrollment
         ' 
         Panel3.BackColor = Color.FromArgb(CByte(44), CByte(53), CByte(79))
         Panel3.BorderStyle = BorderStyle.Fixed3D
+        Panel3.Controls.Add(ComboBox1)
+        Panel3.Controls.Add(Label13)
         Panel3.Controls.Add(cmbProgram)
         Panel3.Controls.Add(Label12)
         Panel3.Controls.Add(cmbGender)
@@ -246,6 +250,33 @@ Partial Class StudentEnrollment
         Panel3.Name = "Panel3"
         Panel3.Size = New Size(772, 397)
         Panel3.TabIndex = 1
+        ' 
+        ' cmbProgram
+        ' 
+        cmbProgram.FormattingEnabled = True
+        cmbProgram.Location = New Point(436, 238)
+        cmbProgram.Name = "cmbProgram"
+        cmbProgram.Size = New Size(267, 28)
+        cmbProgram.TabIndex = 19
+        ' 
+        ' Label12
+        ' 
+        Label12.AutoSize = True
+        Label12.Font = New Font("Microsoft Sans Serif", 10.2F)
+        Label12.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        Label12.Location = New Point(436, 216)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(73, 20)
+        Label12.TabIndex = 18
+        Label12.Text = "Program"
+        ' 
+        ' cmbGender
+        ' 
+        cmbGender.FormattingEnabled = True
+        cmbGender.Location = New Point(436, 78)
+        cmbGender.Name = "cmbGender"
+        cmbGender.Size = New Size(267, 28)
+        cmbGender.TabIndex = 17
         ' 
         ' dtpEnrollmentDate
         ' 
@@ -270,7 +301,7 @@ Partial Class StudentEnrollment
         Label10.AutoSize = True
         Label10.Font = New Font("Microsoft Sans Serif", 10.2F)
         Label10.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label10.Location = New Point(82, 274)
+        Label10.Location = New Point(82, 268)
         Label10.Name = "Label10"
         Label10.Size = New Size(71, 20)
         Label10.TabIndex = 14
@@ -278,7 +309,7 @@ Partial Class StudentEnrollment
         ' 
         ' dtpBirthday
         ' 
-        dtpBirthday.Location = New Point(82, 297)
+        dtpBirthday.Location = New Point(82, 290)
         dtpBirthday.Name = "dtpBirthday"
         dtpBirthday.Size = New Size(267, 27)
         dtpBirthday.TabIndex = 13
@@ -412,32 +443,24 @@ Partial Class StudentEnrollment
         MySqlCommand1.EnableCaching = False
         MySqlCommand1.Transaction = Nothing
         ' 
-        ' cmbGender
+        ' Label13
         ' 
-        cmbGender.FormattingEnabled = True
-        cmbGender.Location = New Point(436, 78)
-        cmbGender.Name = "cmbGender"
-        cmbGender.Size = New Size(267, 28)
-        cmbGender.TabIndex = 17
+        Label13.AutoSize = True
+        Label13.Font = New Font("Microsoft Sans Serif", 10.2F)
+        Label13.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        Label13.Location = New Point(436, 269)
+        Label13.Name = "Label13"
+        Label13.Size = New Size(97, 20)
+        Label13.TabIndex = 20
+        Label13.Text = "Department"
         ' 
-        ' Label12
+        ' ComboBox1
         ' 
-        Label12.AutoSize = True
-        Label12.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label12.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label12.Location = New Point(436, 216)
-        Label12.Name = "Label12"
-        Label12.Size = New Size(73, 20)
-        Label12.TabIndex = 18
-        Label12.Text = "Program"
-        ' 
-        ' cmbProgram
-        ' 
-        cmbProgram.FormattingEnabled = True
-        cmbProgram.Location = New Point(436, 238)
-        cmbProgram.Name = "cmbProgram"
-        cmbProgram.Size = New Size(267, 28)
-        cmbProgram.TabIndex = 19
+        ComboBox1.FormattingEnabled = True
+        ComboBox1.Location = New Point(436, 292)
+        ComboBox1.Name = "ComboBox1"
+        ComboBox1.Size = New Size(267, 28)
+        ComboBox1.TabIndex = 21
         ' 
         ' StudentEnrollment
         ' 
@@ -498,5 +521,7 @@ Partial Class StudentEnrollment
     Friend WithEvents cmbGender As ComboBox
     Friend WithEvents cmbProgram As ComboBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Label13 As Label
 
 End Class

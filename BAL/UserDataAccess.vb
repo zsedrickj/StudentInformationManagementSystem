@@ -88,7 +88,53 @@ Namespace BAL
             ' Execute the query and return the result as a DataTable
             Return db.ExeReader(cmd)
         End Function
+
+        Public Function GetRole(roleName As String) As DataTable
+            Dim cmd As New MySqlCommand
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "SELECT * FROM Roles WHERE LOWER(role_name) = LOWER(@RoleName)"
+
+            cmd.Parameters.AddWithValue("@RoleName", roleName)
+
+            ' Execute the query and return the result as a DataTable
+            Return db.ExeReader(cmd)
+        End Function
+
+        Public Function GetAllRoles() As DataTable
+            Dim cmd As New MySqlCommand
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "SELECT role_id, role_name FROM Role" ' Update this if column names are different
+
+            ' Execute the query and return the result as a DataTable
+            Return db.ExeReader(cmd)
+        End Function
+
+        Public Function GetRoleId(roleName As String) As Integer
+            Try
+                Dim cmd As New MySqlCommand()
+                cmd.CommandType = CommandType.Text
+                cmd.CommandText = "SELECT id FROM Role WHERE LOWER(role_name) = LOWER(@RoleName)"
+                cmd.Parameters.AddWithValue("@RoleName", roleName)
+
+                ' Execute the query and get the result as a DataTable
+                Dim dt As DataTable = db.ExeReader(cmd)
+
+                ' Check if the role exists and the id is valid
+                If dt.Rows.Count > 0 AndAlso Not IsDBNull(dt.Rows(0)("id")) Then
+                    ' Safely convert the value to Integer
+                    Return Convert.ToInt32(dt.Rows(0)("id"))
+                Else
+                    ' If no role is found or the id is invalid, throw an exception
+                    Throw New Exception("Role not found or ID is invalid.")
+                End If
+            Catch ex As Exception
+                ' Log or handle the exception if necessary
+                Throw New Exception($"Error retrieving Role ID: {ex.Message}")
+            End Try
+        End Function
     End Class
+
+
 End Namespace
 
 

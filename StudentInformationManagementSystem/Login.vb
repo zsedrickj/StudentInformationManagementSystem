@@ -41,35 +41,40 @@ Public Class Login
     End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        ' Retrieve username and password from input fields
-        Dim username As String = txtUser.Text.Trim()
+        Dim userName As String = txtUser.Text.Trim()
         Dim password As String = txtPassword.Text.Trim()
 
         ' Check if fields are empty
-        If String.IsNullOrEmpty(username) OrElse String.IsNullOrEmpty(password) Then
-            MessageBox.Show("Please enter both username and password.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        If String.IsNullOrEmpty(userName) OrElse String.IsNullOrEmpty(password) Then
+            MessageBox.Show("Please enter username and password.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
 
-        ' Create an instance of UserDataAccess
-        Dim userAccess As New UserDataAccess()
+        Try
+            ' Retrieve user data from the database (including the stored hashed password)
+            Dim userDataAccess As New UserDataAccess
+            Dim dt As DataTable = userDataAccess.GetUser(userName)
 
-        ' Fetch user data based on the credentials
-        Dim userTable As DataTable = userAccess.GetUserByCredentials(username, password)
+            If dt.Rows.Count > 0 Then
+                ' Retrieve the stored hashed password from the database
+                Dim storedHashedPassword As String = dt.Rows(0)("password").ToString()
 
-        ' Validate user
-        If userTable IsNot Nothing AndAlso userTable.Rows.Count > 0 Then
-            ' Login successful
+                ' Verify if the entered password matches the stored hashed password
+                If BCrypt.Net.BCrypt.Verify(password, storedHashedPassword) Then
+                    MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Proceed with login logic (e.g., redirect to dashboard)
+                    Dim studentEnrollment As New StudentEnrollment
+                    studentEnrollment.Show()
+                    Me.Hide()
 
-            MessageBox.Show("Login successful!", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-            ' Redirect to the main form or perform the next action
-            Dim mainForm As New StudentEnrollment() ' Replace with your main form
-            mainForm.Show()
-            Me.Hide()
-        Else
-            ' Login failed
-            MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+                Else
+                    MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class

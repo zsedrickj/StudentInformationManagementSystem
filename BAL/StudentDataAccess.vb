@@ -10,12 +10,16 @@ Namespace BAL
 
         ' Insert a new student record into the Students table
         Public Function InsertStudent(student As Students) As Integer
+            If student.ProgramId <= 0 OrElse student.DepartmentId <= 0 Then
+                Throw New ArgumentException("Invalid ProgramId or DepartmentId.")
+            End If
+
             Dim cmd As New MySqlCommand()
             cmd.CommandType = CommandType.Text
-            cmd.CommandText = "INSERT INTO Students (first_name, last_name, email, phone_number, dob, gender, address, enrollment_date, program_id) " &
-                      "VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @DateOfBirth, @Gender, @Address, @EnrollmentDate, @ProgramId)"
+            cmd.CommandText = "INSERT INTO Students (first_name, last_name, email, phone_number, dob, gender, address, enrollment_date, department_id, program_id) " &
+                      "VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @DateOfBirth, @Gender, @Address, @EnrollmentDate, @DepartmentId, @ProgramId)"
 
-            ' Add parameters to prevent SQL injection
+            ' Add parameters
             cmd.Parameters.AddWithValue("@FirstName", student.FirstName)
             cmd.Parameters.AddWithValue("@LastName", student.LastName)
             cmd.Parameters.AddWithValue("@Email", student.Email)
@@ -24,9 +28,10 @@ Namespace BAL
             cmd.Parameters.AddWithValue("@Gender", student.Gender)
             cmd.Parameters.AddWithValue("@Address", student.Address)
             cmd.Parameters.AddWithValue("@EnrollmentDate", student.EnrollmentDate)
+            cmd.Parameters.AddWithValue("@DepartmentId", student.DepartmentId)
             cmd.Parameters.AddWithValue("@ProgramId", student.ProgramId)
 
-            ' Execute the command and return the number of affected rows
+            ' Execute the command
             Return db.ExeNonQuery(cmd)
         End Function
 

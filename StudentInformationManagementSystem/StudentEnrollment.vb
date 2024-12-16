@@ -3,6 +3,7 @@ Imports BEL
 Imports BAL
 Imports BAL.BAL
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
+Imports Mysqlx.XDevAPI.Common
 Public Class StudentEnrollment
     Public studentAccess As New StudentDataAccess()
     Private student As Students
@@ -35,22 +36,51 @@ Public Class StudentEnrollment
         Me.Location = New Point((Screen.PrimaryScreen.WorkingArea.Width - Me.Width) / 2, (Screen.PrimaryScreen.WorkingArea.Height - Me.Height) / 2)
         IsNullOrEmpty()
         GetUserName()
+        cmbGender.Items.Add("- Select Gender -")
         cmbGender.Items.Add("Male")
         cmbGender.Items.Add("Female")
         cmbGender.SelectedIndex = 0
+        cmbDepartment.Enabled = True
         PopulateDepartmentComboBox(cmbDepartment)
-    End Sub
 
-    Private Sub SetDateTimePickerValue(dtp As DateTimePicker, dateValue As DateTime)
-        ' Check if the DateTime value is valid (not DateTime.MinValue)
-        If dateValue <> DateTime.MinValue Then
-            dtp.Value = dateValue
-        Else
-            dtp.Value = DateTime.Now  ' Use a default value if invalid
+        ' Disable Program ComboBox initially
+        cmbProgram.Enabled = False
+        cmbProgram.Items.Clear()
+        cmbProgram.Items.Add("- Select Program -")
+        cmbProgram.SelectedIndex = 0
+    End Sub
+    Private Sub btnEnroll_Click(sender As Object, e As EventArgs) Handles btnEnroll.Click
+
+        If Validation() = True Then
+            Dim newStudent As New Students() With {
+       .FirstName = txtFirstName.Text, ' Assuming these are TextBox controls
+       .LastName = txtLastName.Text,
+       .Email = txtEmail.Text,
+       .PhoneNumber = txtPhoneNumber.Text,
+       .DateOfBirth = dtpBirthday.Value, ' Assuming this is a DateTimePicker control
+       .Gender = cmbGender.SelectedItem.ToString(), ' Assuming this is a ComboBox control
+       .Address = txtAddress.Text,
+       .EnrollmentDate = Date.Now, ' Auto-set to current date
+       .ProgramId = CInt(cmbProgram.SelectedIndex), ' Assuming ProgramId is bound to a ComboBox
+       .DepartmentId = CInt(cmbDepartment.SelectedIndex) ' Assuming DepartmentId is bound to a ComboBox
+   }
+
+            ' Insert the student into the database
+            Dim rowsAffected As Integer = studentAccess.InsertStudent(newStudent)
+
+            ' Check if the insertion was successful
+            If rowsAffected > 0 Then
+                MessageBox.Show("Student enrolled successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                ResetForm()
+
+            Else
+                MessageBox.Show("An error occurred while enrolling the student.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
         End If
+
+
     End Sub
-
-
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Const message = "Are you sure that you would like to close the form?"
@@ -65,14 +95,10 @@ Public Class StudentEnrollment
         ' Otherwise, close the application
         Application.Exit()
     End Sub
-
-
-
     Private Sub btnStudentEnrollment_Click(sender As Object, e As EventArgs) Handles btnStudentEnrollment.Click
 
 
     End Sub
-
     Private Sub btnCourseEnrollment_Click(sender As Object, e As EventArgs) Handles btnCourseEnrollment.Click
 
         DataBinding()
@@ -83,11 +109,118 @@ Public Class StudentEnrollment
 
     End Sub
     Private Sub cmbDepartment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDepartment.SelectedIndexChanged
-        ' Get the selected DepartmentID (assuming you have a dictionary or mapping of department names to IDs)
-        Dim selectedDepartmentID As Integer = studentAccess.GetDepartmentIDByName(cmbDepartment.SelectedItem.ToString())
+        ' Check if a valid item is selected
+        If cmbDepartment.SelectedIndex = -1 OrElse cmbDepartment.SelectedItem.ToString() = "- Select Department -" Then
+            ' Reset the Program ComboBox if no department is selected
+            cmbProgram.Items.Clear()
+            cmbProgram.Items.Add("- Select Program -")
+            cmbProgram.SelectedIndex = 0
+            cmbProgram.Enabled = False
+            Return
+        End If
 
-        ' Populate the Program ComboBox based on the selected department
-        PopulateProgramComboBox(cmbProgram, selectedDepartmentID)
+        ' Get the selected department name
+        Dim departmentName As String = cmbDepartment.SelectedItem.ToString()
+
+        ' Fetch the department ID using the name
+        Dim departmentID As Integer = studentAccess.GetDepartmentIDByName(departmentName)
+
+        ' Validate the department ID
+        If departmentID > 0 Then
+            ' Fetch program names for the selected department
+            Dim programNames As List(Of String) = studentAccess.GetProgramNamesByDepartment(departmentID)
+
+            ' Populate the Program ComboBox
+            cmbProgram.Items.Clear()
+            cmbProgram.Items.Add("- Select Program -")
+            cmbProgram.Items.AddRange(programNames.ToArray())
+            cmbProgram.SelectedIndex = 0
+            cmbProgram.Enabled = True
+        Else
+            ' Handle invalid department ID
+            MessageBox.Show("Invalid department selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cmbProgram.Items.Clear()
+            cmbProgram.Items.Add("- Select Program -")
+            cmbProgram.SelectedIndex = 0
+            cmbProgram.Enabled = False
+        End If
+
+    End Sub
+    Private Function Validation() As Boolean
+
+        ' Check if ALL fields are at their default state or empty
+        If String.IsNullOrWhiteSpace(txtFirstName.Text) AndAlso
+       String.IsNullOrWhiteSpace(txtLastName.Text) AndAlso
+       String.IsNullOrWhiteSpace(txtEmail.Text) AndAlso
+       String.IsNullOrWhiteSpace(txtPhoneNumber.Text) AndAlso
+       (cmbGender.SelectedIndex = 0 OrElse cmbGender.SelectedItem.ToString() = "- Select Gender -") AndAlso
+       String.IsNullOrWhiteSpace(txtAddress.Text) AndAlso
+       (cmbDepartment.SelectedIndex = 0 OrElse cmbDepartment.SelectedItem.ToString() = "- Select Department -") AndAlso
+       (cmbProgram.SelectedIndex = 0 OrElse cmbProgram.SelectedItem.ToString() = "- Select Program -") Then
+
+            MessageBox.Show("All fields are required. Please fill them out.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtFirstName.Focus() ' Focus on the first field
+            Return False
+        End If
+
+
+        ' Check individual fields
+        If String.IsNullOrWhiteSpace(txtFirstName.Text) Then
+            MessageBox.Show("First Name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtFirstName.Focus()
+            Return False
+
+        ElseIf String.IsNullOrWhiteSpace(txtLastName.Text) Then
+            MessageBox.Show("Last Name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtLastName.Focus()
+            Return False
+
+        ElseIf String.IsNullOrWhiteSpace(txtEmail.Text) Then
+            MessageBox.Show("Email is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtEmail.Focus()
+            Return False
+
+        ElseIf String.IsNullOrWhiteSpace(txtPhoneNumber.Text) Then
+            MessageBox.Show("Phone Number is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtPhoneNumber.Focus()
+            Return False
+
+        ElseIf cmbGender.SelectedIndex = -1 Then
+            MessageBox.Show("Please select a Gender.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cmbGender.Focus()
+            Return False
+
+        ElseIf String.IsNullOrWhiteSpace(txtAddress.Text) Then
+            MessageBox.Show("Address is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtAddress.Focus()
+            Return False
+
+        ElseIf cmbDepartment.SelectedIndex = -1 OrElse cmbDepartment.SelectedItem.ToString() = "- Select Department -" Then
+            MessageBox.Show("Please select a valid Department.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cmbDepartment.Focus()
+            Return False
+
+        ElseIf cmbProgram.SelectedIndex = -1 OrElse cmbProgram.SelectedItem.ToString() = "- Select Program -" Then
+            MessageBox.Show("Please select a valid Program.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cmbProgram.Focus()
+            Return False
+
+        ElseIf dtpBirthday.Value > Date.Now Then
+            MessageBox.Show("Date of Birth cannot be in the future.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            dtpBirthday.Focus()
+            Return False
+        End If
+
+        ' If all validations pass
+        Return True
+    End Function
+    Private Sub SetDateTimePickerValue(dtp As DateTimePicker, dateValue As DateTime)
+        ' Check if the DateTime value is valid (not DateTime.MinValue)
+        If dateValue <> DateTime.MinValue Then
+            dtp.Value = dateValue
+        Else
+            dtp.Value = DateTime.Now  ' Use a default value if invalid
+        End If
     End Sub
     Public Sub PopulateDepartmentComboBox(cmbDepartment As ComboBox)
         Try
@@ -97,22 +230,22 @@ Public Class StudentEnrollment
             ' Clear existing items in the ComboBox
             cmbDepartment.Items.Clear()
 
+            ' Add a placeholder item
+            cmbDepartment.Items.Add("- Select Department -")
+
             ' Add each department name to the ComboBox
             For Each departmentName As String In departmentNames
                 cmbDepartment.Items.Add(departmentName)
             Next
 
-            ' Set the first item as selected, if available
-            If cmbDepartment.Items.Count > 0 Then
-                cmbDepartment.SelectedIndex = 0
-            End If
+            ' Set the placeholder as the default selected item
+            cmbDepartment.SelectedIndex = 0
         Catch ex As Exception
             ' Handle any errors
-            MessageBox.Show("Error populating Department ComboBox: " & ex.Message)
+            MessageBox.Show("Error populating Department ComboBox: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-    Public Sub PopulateProgramComboBox(cmbProgram As ComboBox, departmentID As Integer)
+    Private Sub PopulateProgramComboBox(cmbProgram As ComboBox, departmentID As Integer)
         Try
             ' Retrieve program names for the selected department
             Dim programNames As List(Of String) = studentAccess.GetProgramNamesByDepartment(departmentID)
@@ -167,19 +300,21 @@ Public Class StudentEnrollment
     Private Sub DataBinding()
         StoredData()
         student = New Students()
+        ' Clear existing bindings to avoid conflicts
+        txtFirstName.DataBindings.Clear()
+        txtLastName.DataBindings.Clear()
+        txtEmail.DataBindings.Clear()
+        txtPhoneNumber.DataBindings.Clear()
+        txtAddress.DataBindings.Clear()
+        cmbGender.DataBindings.Clear()
+        cmbProgram.DataBindings.Clear()
 
-        ' I-bind ang mga TextBox sa properties ng Student model
+        ' Bind new data
         txtFirstName.DataBindings.Add("Text", student, "FirstName")
         txtLastName.DataBindings.Add("Text", student, "LastName")
         txtEmail.DataBindings.Add("Text", student, "Email")
         txtPhoneNumber.DataBindings.Add("Text", student, "PhoneNumber")
         txtAddress.DataBindings.Add("Text", student, "Address")
-
-        ' I-bind ang DateTimePicker sa Date properties
-        SetDateTimePickerValue(dtpBirthday, student.DateOfBirth)
-        SetDateTimePickerValue(dtpEnrollmentDate, student.EnrollmentDate)
-
-        ' I-bind ang ComboBox sa properties
         cmbGender.DataBindings.Add("SelectedItem", student, "Gender")
         cmbProgram.DataBindings.Add("SelectedValue", student, "ProgramId")
     End Sub
@@ -225,7 +360,15 @@ Public Class StudentEnrollment
         End If
     End Sub
 
-    Private Sub btnEnroll_Click(sender As Object, e As EventArgs) Handles btnEnroll.Click
-
+    Private Sub ResetForm()
+        txtFirstName.Clear()
+        txtLastName.Clear()
+        txtEmail.Clear()
+        txtPhoneNumber.Clear()
+        txtAddress.Clear()
+        cmbGender.SelectedIndex = 0
+        cmbDepartment.SelectedIndex = 0
+        cmbProgram.SelectedIndex = 0
+        dtpBirthday.Value = Date.Now
     End Sub
 End Class

@@ -9,6 +9,6 @@ Public Class Students
     Public Property Address As String
     Public Property EnrollmentDate As Date
     Public Property ProgramId As Integer
-
+    Public Property DepartmentId As Integer
 
 End Class

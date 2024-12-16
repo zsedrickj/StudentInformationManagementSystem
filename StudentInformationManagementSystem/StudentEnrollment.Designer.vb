@@ -35,6 +35,9 @@ Partial Class StudentEnrollment
         pnlNav = New Panel()
         Panel1 = New Panel()
         Panel3 = New Panel()
+        btnEnroll = New Button()
+        cmbDepartment = New ComboBox()
+        Label13 = New Label()
         cmbProgram = New ComboBox()
         Label12 = New Label()
         cmbGender = New ComboBox()
@@ -56,8 +59,6 @@ Partial Class StudentEnrollment
         Panel4 = New Panel()
         Label8 = New Label()
         MySqlCommand1 = New MySql.Data.MySqlClient.MySqlCommand()
-        Label13 = New Label()
-        ComboBox1 = New ComboBox()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
         Panel1.SuspendLayout()
@@ -226,7 +227,8 @@ Partial Class StudentEnrollment
         ' 
         Panel3.BackColor = Color.FromArgb(CByte(44), CByte(53), CByte(79))
         Panel3.BorderStyle = BorderStyle.Fixed3D
-        Panel3.Controls.Add(ComboBox1)
+        Panel3.Controls.Add(btnEnroll)
+        Panel3.Controls.Add(cmbDepartment)
         Panel3.Controls.Add(Label13)
         Panel3.Controls.Add(cmbProgram)
         Panel3.Controls.Add(Label12)
@@ -251,10 +253,43 @@ Partial Class StudentEnrollment
         Panel3.Size = New Size(772, 397)
         Panel3.TabIndex = 1
         ' 
+        ' btnEnroll
+        ' 
+        btnEnroll.Dock = DockStyle.Bottom
+        btnEnroll.FlatAppearance.BorderSize = 0
+        btnEnroll.FlatStyle = FlatStyle.Flat
+        btnEnroll.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnEnroll.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        btnEnroll.Location = New Point(0, 356)
+        btnEnroll.Name = "btnEnroll"
+        btnEnroll.Size = New Size(768, 37)
+        btnEnroll.TabIndex = 22
+        btnEnroll.Text = "Enroll Student"
+        btnEnroll.UseVisualStyleBackColor = True
+        ' 
+        ' cmbDepartment
+        ' 
+        cmbDepartment.FormattingEnabled = True
+        cmbDepartment.Location = New Point(436, 239)
+        cmbDepartment.Name = "cmbDepartment"
+        cmbDepartment.Size = New Size(267, 28)
+        cmbDepartment.TabIndex = 21
+        ' 
+        ' Label13
+        ' 
+        Label13.AutoSize = True
+        Label13.Font = New Font("Microsoft Sans Serif", 10.2F)
+        Label13.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        Label13.Location = New Point(436, 216)
+        Label13.Name = "Label13"
+        Label13.Size = New Size(97, 20)
+        Label13.TabIndex = 20
+        Label13.Text = "Department"
+        ' 
         ' cmbProgram
         ' 
         cmbProgram.FormattingEnabled = True
-        cmbProgram.Location = New Point(436, 238)
+        cmbProgram.Location = New Point(436, 293)
         cmbProgram.Name = "cmbProgram"
         cmbProgram.Size = New Size(267, 28)
         cmbProgram.TabIndex = 19
@@ -264,7 +299,7 @@ Partial Class StudentEnrollment
         Label12.AutoSize = True
         Label12.Font = New Font("Microsoft Sans Serif", 10.2F)
         Label12.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label12.Location = New Point(436, 216)
+        Label12.Location = New Point(436, 270)
         Label12.Name = "Label12"
         Label12.Size = New Size(73, 20)
         Label12.TabIndex = 18
@@ -443,25 +478,6 @@ Partial Class StudentEnrollment
         MySqlCommand1.EnableCaching = False
         MySqlCommand1.Transaction = Nothing
         ' 
-        ' Label13
-        ' 
-        Label13.AutoSize = True
-        Label13.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label13.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label13.Location = New Point(436, 269)
-        Label13.Name = "Label13"
-        Label13.Size = New Size(97, 20)
-        Label13.TabIndex = 20
-        Label13.Text = "Department"
-        ' 
-        ' ComboBox1
-        ' 
-        ComboBox1.FormattingEnabled = True
-        ComboBox1.Location = New Point(436, 292)
-        ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New Size(267, 28)
-        ComboBox1.TabIndex = 21
-        ' 
         ' StudentEnrollment
         ' 
         AutoScaleDimensions = New SizeF(10F, 20F)
@@ -521,7 +537,8 @@ Partial Class StudentEnrollment
     Friend WithEvents cmbGender As ComboBox
     Friend WithEvents cmbProgram As ComboBox
     Friend WithEvents Label12 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbDepartment As ComboBox
     Friend WithEvents Label13 As Label
+    Friend WithEvents btnEnroll As Button
 
 End Class

@@ -4,7 +4,7 @@ Imports BAL
 Imports BAL.BAL
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 Public Class StudentEnrollment
-    Public opr As New StudentDataAccess()
+    Public studentAccess As New StudentDataAccess()
     Private student As Students
 
     'STORED DATA
@@ -38,6 +38,7 @@ Public Class StudentEnrollment
         cmbGender.Items.Add("Male")
         cmbGender.Items.Add("Female")
         cmbGender.SelectedIndex = 0
+        PopulateDepartmentComboBox(cmbDepartment)
     End Sub
 
     Private Sub SetDateTimePickerValue(dtp As DateTimePicker, dateValue As DateTime)
@@ -47,6 +48,91 @@ Public Class StudentEnrollment
         Else
             dtp.Value = DateTime.Now  ' Use a default value if invalid
         End If
+    End Sub
+
+
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Const message = "Are you sure that you would like to close the form?"
+        Const caption = "Exit"
+        Dim result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        ' If the No button was pressed, do nothing
+        If result = DialogResult.No Then
+            Return ' Exit the method to prevent closing
+        End If
+
+        ' Otherwise, close the application
+        Application.Exit()
+    End Sub
+
+
+
+    Private Sub btnStudentEnrollment_Click(sender As Object, e As EventArgs) Handles btnStudentEnrollment.Click
+
+
+    End Sub
+
+    Private Sub btnCourseEnrollment_Click(sender As Object, e As EventArgs) Handles btnCourseEnrollment.Click
+
+        DataBinding()
+
+        Dim courseEnrollment As New CourseEnrollment(student)
+        courseEnrollment.Show()
+        Me.Hide()
+
+    End Sub
+    Private Sub cmbDepartment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDepartment.SelectedIndexChanged
+        ' Get the selected DepartmentID (assuming you have a dictionary or mapping of department names to IDs)
+        Dim selectedDepartmentID As Integer = studentAccess.GetDepartmentIDByName(cmbDepartment.SelectedItem.ToString())
+
+        ' Populate the Program ComboBox based on the selected department
+        PopulateProgramComboBox(cmbProgram, selectedDepartmentID)
+    End Sub
+    Public Sub PopulateDepartmentComboBox(cmbDepartment As ComboBox)
+        Try
+            ' Retrieve all department names
+            Dim departmentNames As List(Of String) = studentAccess.GetAllDepartmentNames()
+
+            ' Clear existing items in the ComboBox
+            cmbDepartment.Items.Clear()
+
+            ' Add each department name to the ComboBox
+            For Each departmentName As String In departmentNames
+                cmbDepartment.Items.Add(departmentName)
+            Next
+
+            ' Set the first item as selected, if available
+            If cmbDepartment.Items.Count > 0 Then
+                cmbDepartment.SelectedIndex = 0
+            End If
+        Catch ex As Exception
+            ' Handle any errors
+            MessageBox.Show("Error populating Department ComboBox: " & ex.Message)
+        End Try
+    End Sub
+
+    Public Sub PopulateProgramComboBox(cmbProgram As ComboBox, departmentID As Integer)
+        Try
+            ' Retrieve program names for the selected department
+            Dim programNames As List(Of String) = studentAccess.GetProgramNamesByDepartment(departmentID)
+
+            ' Clear existing items in the ComboBox
+            cmbProgram.Items.Clear()
+
+            ' Add each program name to the ComboBox
+            For Each programName As String In programNames
+                cmbProgram.Items.Add(programName)
+            Next
+
+            ' Set the first item as selected, if available
+            If cmbProgram.Items.Count > 0 Then
+                cmbProgram.SelectedIndex = 0
+            End If
+        Catch ex As Exception
+            ' Handle any errors
+            MessageBox.Show("Error populating Program ComboBox: " & ex.Message)
+        End Try
     End Sub
     Private Sub IsNullOrEmpty()
         If Not String.IsNullOrEmpty(storedFirstName) Then
@@ -78,6 +164,25 @@ Public Class StudentEnrollment
         End If
 
     End Sub
+    Private Sub DataBinding()
+        StoredData()
+        student = New Students()
+
+        ' I-bind ang mga TextBox sa properties ng Student model
+        txtFirstName.DataBindings.Add("Text", student, "FirstName")
+        txtLastName.DataBindings.Add("Text", student, "LastName")
+        txtEmail.DataBindings.Add("Text", student, "Email")
+        txtPhoneNumber.DataBindings.Add("Text", student, "PhoneNumber")
+        txtAddress.DataBindings.Add("Text", student, "Address")
+
+        ' I-bind ang DateTimePicker sa Date properties
+        SetDateTimePickerValue(dtpBirthday, student.DateOfBirth)
+        SetDateTimePickerValue(dtpEnrollmentDate, student.EnrollmentDate)
+
+        ' I-bind ang ComboBox sa properties
+        cmbGender.DataBindings.Add("SelectedItem", student, "Gender")
+        cmbProgram.DataBindings.Add("SelectedValue", student, "ProgramId")
+    End Sub
     Private Sub StoredData()
         storedFirstName = txtFirstName.Text
         storedLastName = txtLastName.Text
@@ -86,6 +191,7 @@ Public Class StudentEnrollment
         storedAddress = txtAddress.Text
         storedDateOfBirth = dtpBirthday.Value
         storedEnrollmentDate = dtpEnrollmentDate.Value
+
         If cmbGender.SelectedItem IsNot Nothing Then
             storedGender = cmbGender.SelectedItem.ToString()
         Else
@@ -119,51 +225,7 @@ Public Class StudentEnrollment
         End If
     End Sub
 
-
-    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        Const message As String = "Are you sure that you would like to close the form?"
-        Const caption As String = "Exit"
-        Dim result As DialogResult = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-        ' If the No button was pressed, do nothing
-        If result = DialogResult.No Then
-            Return ' Exit the method to prevent closing
-        End If
-
-        ' Otherwise, close the application
-        Application.Exit()
-    End Sub
-
-
-
-    Private Sub btnStudentEnrollment_Click(sender As Object, e As EventArgs) Handles btnStudentEnrollment.Click
-
-
-    End Sub
-
-    Private Sub btnCourseEnrollment_Click(sender As Object, e As EventArgs) Handles btnCourseEnrollment.Click
-
-        StoredData()
-        student = New Students()
-
-        ' I-bind ang mga TextBox sa properties ng Student model
-        txtFirstName.DataBindings.Add("Text", student, "FirstName")
-        txtLastName.DataBindings.Add("Text", student, "LastName")
-        txtEmail.DataBindings.Add("Text", student, "Email")
-        txtPhoneNumber.DataBindings.Add("Text", student, "PhoneNumber")
-        txtAddress.DataBindings.Add("Text", student, "Address")
-
-        ' I-bind ang DateTimePicker sa Date properties
-        SetDateTimePickerValue(dtpBirthday, student.DateOfBirth)
-        SetDateTimePickerValue(dtpEnrollmentDate, student.EnrollmentDate)
-
-        ' I-bind ang ComboBox sa properties
-        cmbGender.DataBindings.Add("SelectedItem", student, "Gender")
-        cmbProgram.DataBindings.Add("SelectedValue", student, "ProgramId")
-
-        Dim courseEnrollment As New CourseEnrollment(student)
-        courseEnrollment.Show()
-        Me.Hide()
+    Private Sub btnEnroll_Click(sender As Object, e As EventArgs) Handles btnEnroll.Click
 
     End Sub
 End Class

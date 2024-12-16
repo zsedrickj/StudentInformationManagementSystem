@@ -76,5 +76,65 @@ Namespace BAL
             ' Execute the command and return the number of affected rows
             Return db.ExeNonQuery(cmd)
         End Function
+
+        Public Function GetProgramNamesByDepartment(departmentID As Integer) As List(Of String)
+            Dim cmd As New MySqlCommand()
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "SELECT program_name FROM Programs WHERE department_id = @department_id"
+
+            ' Add parameter to prevent SQL injection
+            cmd.Parameters.AddWithValue("@department_id", departmentID)
+
+            ' Execute the query and retrieve the results
+            Dim result As DataTable = db.ExeReader(cmd)
+
+            ' Create a list to hold the program names
+            Dim programNames As New List(Of String)()
+
+            ' Loop through the DataTable rows and add each ProgramName to the list
+            For Each row As DataRow In result.Rows
+                programNames.Add(row("program_name").ToString())
+            Next
+
+            Return programNames
+        End Function
+        Public Function GetDepartmentIDByName(departmentName As String) As Integer
+            Dim cmd As New MySqlCommand()
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "SELECT department_id FROM Departments WHERE department_name = @department_name"
+
+            ' Add parameter to prevent SQL injection
+            cmd.Parameters.AddWithValue("@department_name", departmentName)
+
+            ' Execute the query and retrieve the result
+            Dim result As Object = db.ExeScalar(cmd)
+
+            ' Return the DepartmentID if found, otherwise return -1
+            If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                Return Convert.ToInt32(result)
+            Else
+                Return -1
+            End If
+        End Function
+
+        Public Function GetAllDepartmentNames() As List(Of String)
+            Dim cmd As New MySqlCommand()
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "SELECT department_name FROM Departments"
+
+            ' Execute the query and retrieve the results
+            Dim result As DataTable = db.ExeReader(cmd)
+
+            ' Create a list to hold the department names
+            Dim departmentNames As New List(Of String)()
+
+            ' Loop through the DataTable rows and add each DepartmentName to the list
+            For Each row As DataRow In result.Rows
+                departmentNames.Add(row("department_name").ToString())
+            Next
+
+            Return departmentNames
+        End Function
+
     End Class
 End Namespace

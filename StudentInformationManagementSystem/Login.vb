@@ -54,27 +54,58 @@ Public Class Login
             ' Retrieve user data from the database (including the stored hashed password)
             Dim userDataAccess As New UserDataAccess
             Dim dt As DataTable = userDataAccess.GetUser(userName)
-
-            If dt.Rows.Count > 0 Then
-                ' Retrieve the stored hashed password from the database
-                Dim storedHashedPassword As String = dt.Rows(0)("password").ToString()
-
-                ' Verify if the entered password matches the stored hashed password
-                If BCrypt.Net.BCrypt.Verify(password, storedHashedPassword) Then
-                    MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    ' Proceed with login logic (e.g., redirect to dashboard)
-                    Dim studentEnrollment As New StudentEnrollment
-                    studentEnrollment.Show()
-                    Me.Hide()
-
-                Else
-                    MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
+            If AdminLogin(userName, password) Then
+                MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                ' Proceed with login logic (e.g., redirect to dashboard)
+                Dim studentEnrollment As New StudentEnrollment
+                studentEnrollment.Show()
+                Me.Hide()
             Else
-                MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If dt.Rows.Count > 0 Then
+                    ' Retrieve the stored hashed password from the database
+                    Dim storedHashedPassword As String = dt.Rows(0)("password").ToString()
+
+
+
+                    ' Verify if the entered password matches the stored hashed password
+                    If BCrypt.Net.BCrypt.Verify(password, storedHashedPassword) Then
+                        MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        ' Proceed with login logic (e.g., redirect to dashboard)
+                        Dim studentEnrollment As New StudentEnrollment
+                        studentEnrollment.Show()
+                        Me.Hide()
+
+                    Else
+                        MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                Else
+                    MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
             End If
+
         Catch ex As Exception
             MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    Private Function AdminLogin(username As String, password As String) As Boolean
+        ' Check if the username is "admin" and the password matches the hashed version of "12345"
+        If username.ToLower() = "admin" AndAlso HashPassword(password) = HashPassword("12345") Then
+            Return True ' Login is successful
+        End If
+
+        Return False ' Login failed
+    End Function
+    Private Function HashPassword(password As String) As String
+        Using sha256 As System.Security.Cryptography.SHA256 = System.Security.Cryptography.SHA256.Create()
+            Dim bytes As Byte() = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password))
+            Dim builder As New System.Text.StringBuilder()
+            For Each b As Byte In bytes
+                builder.Append(b.ToString("x2"))
+            Next
+            Return builder.ToString()
+        End Using
+
+    End Function
+
 End Class

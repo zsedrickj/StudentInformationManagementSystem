@@ -4,6 +4,7 @@ Imports BAL
 Imports BAL.BAL
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 Imports Mysqlx.XDevAPI.Common
+
 Public Class StudentEnrollment
     Public studentAccess As New StudentDataAccess()
     Private student As Students
@@ -298,7 +299,6 @@ Public Class StudentEnrollment
 
     End Sub
     Private Sub DataBinding()
-        StoredData()
         student = New Students()
         ' Clear existing bindings to avoid conflicts
         txtFirstName.DataBindings.Clear()
@@ -317,28 +317,6 @@ Public Class StudentEnrollment
         txtAddress.DataBindings.Add("Text", student, "Address")
         cmbGender.DataBindings.Add("SelectedItem", student, "Gender")
         cmbProgram.DataBindings.Add("SelectedValue", student, "ProgramId")
-    End Sub
-    Private Sub StoredData()
-        storedFirstName = txtFirstName.Text
-        storedLastName = txtLastName.Text
-        storedEmail = txtEmail.Text
-        storedPhoneNumber = txtPhoneNumber.Text
-        storedAddress = txtAddress.Text
-        storedDateOfBirth = dtpBirthday.Value
-        storedEnrollmentDate = dtpEnrollmentDate.Value
-
-        If cmbGender.SelectedItem IsNot Nothing Then
-            storedGender = cmbGender.SelectedItem.ToString()
-        Else
-            storedGender = String.Empty ' Or set to a default value if necessary
-        End If
-
-        If cmbProgram.SelectedItem IsNot Nothing Then
-            storedProgramId = cmbProgram.SelectedItem.ToString()
-        Else
-            storedProgramId = String.Empty ' Or set to a default value
-        End If
-
     End Sub
     Public Sub GetUserName()
         ' Get the username input from the Login form
@@ -371,4 +349,5 @@ Public Class StudentEnrollment
         cmbProgram.SelectedIndex = 0
         dtpBirthday.Value = Date.Now
     End Sub
+
 End Class

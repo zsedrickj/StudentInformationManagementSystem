@@ -22,10 +22,10 @@ Partial Class CourseEnrollment
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Button1 = New Button()
+        btnPaymentManagement = New Button()
         btnExit = New Button()
-        btnDelete = New Button()
-        btnUpdate = New Button()
+        btnGradingForm = New Button()
+        btnCourseEnrollment = New Button()
         btnStudentEnrollment = New Button()
         Label1 = New Label()
         PictureBox1 = New PictureBox()
@@ -35,30 +35,38 @@ Partial Class CourseEnrollment
         pnlNav = New Panel()
         Panel1 = New Panel()
         Panel3 = New Panel()
+        btnSubmit = New Button()
+        DateTimePicker1 = New DateTimePicker()
+        lblStatus = New Label()
+        Label2 = New Label()
+        cmbCourses = New ComboBox()
+        txtStudentId = New TextBox()
         Panel4 = New Panel()
         Label8 = New Label()
         MySqlCommand1 = New MySql.Data.MySqlClient.MySqlCommand()
+        MySqlCommand2 = New MySql.Data.MySqlClient.MySqlCommand()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
         Panel1.SuspendLayout()
+        Panel3.SuspendLayout()
         Panel4.SuspendLayout()
         SuspendLayout()
         ' 
-        ' Button1
+        ' btnPaymentManagement
         ' 
-        Button1.Cursor = Cursors.Hand
-        Button1.Dock = DockStyle.Top
-        Button1.FlatAppearance.BorderSize = 0
-        Button1.FlatStyle = FlatStyle.Flat
-        Button1.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Button1.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Button1.Location = New Point(0, 256)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(249, 37)
-        Button1.TabIndex = 2
-        Button1.Text = "Payment Management"
-        Button1.TextImageRelation = TextImageRelation.TextBeforeImage
-        Button1.UseVisualStyleBackColor = True
+        btnPaymentManagement.Cursor = Cursors.Hand
+        btnPaymentManagement.Dock = DockStyle.Top
+        btnPaymentManagement.FlatAppearance.BorderSize = 0
+        btnPaymentManagement.FlatStyle = FlatStyle.Flat
+        btnPaymentManagement.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnPaymentManagement.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        btnPaymentManagement.Location = New Point(0, 256)
+        btnPaymentManagement.Name = "btnPaymentManagement"
+        btnPaymentManagement.Size = New Size(249, 37)
+        btnPaymentManagement.TabIndex = 2
+        btnPaymentManagement.Text = "Payment Management"
+        btnPaymentManagement.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnPaymentManagement.UseVisualStyleBackColor = True
         ' 
         ' btnExit
         ' 
@@ -74,37 +82,37 @@ Partial Class CourseEnrollment
         btnExit.Text = "Exit"
         btnExit.UseVisualStyleBackColor = True
         ' 
-        ' btnDelete
+        ' btnGradingForm
         ' 
-        btnDelete.Cursor = Cursors.Hand
-        btnDelete.Dock = DockStyle.Top
-        btnDelete.FlatAppearance.BorderSize = 0
-        btnDelete.FlatStyle = FlatStyle.Flat
-        btnDelete.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDelete.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        btnDelete.Location = New Point(0, 219)
-        btnDelete.Name = "btnDelete"
-        btnDelete.Size = New Size(249, 37)
-        btnDelete.TabIndex = 1
-        btnDelete.Text = "Grading Form"
-        btnDelete.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnDelete.UseVisualStyleBackColor = True
+        btnGradingForm.Cursor = Cursors.Hand
+        btnGradingForm.Dock = DockStyle.Top
+        btnGradingForm.FlatAppearance.BorderSize = 0
+        btnGradingForm.FlatStyle = FlatStyle.Flat
+        btnGradingForm.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnGradingForm.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        btnGradingForm.Location = New Point(0, 219)
+        btnGradingForm.Name = "btnGradingForm"
+        btnGradingForm.Size = New Size(249, 37)
+        btnGradingForm.TabIndex = 1
+        btnGradingForm.Text = "Grading Form"
+        btnGradingForm.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnGradingForm.UseVisualStyleBackColor = True
         ' 
-        ' btnUpdate
+        ' btnCourseEnrollment
         ' 
-        btnUpdate.Cursor = Cursors.Hand
-        btnUpdate.Dock = DockStyle.Top
-        btnUpdate.FlatAppearance.BorderSize = 0
-        btnUpdate.FlatStyle = FlatStyle.Flat
-        btnUpdate.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnUpdate.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        btnUpdate.Location = New Point(0, 182)
-        btnUpdate.Name = "btnUpdate"
-        btnUpdate.Size = New Size(249, 37)
-        btnUpdate.TabIndex = 1
-        btnUpdate.Text = "Course Enrollment"
-        btnUpdate.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnUpdate.UseVisualStyleBackColor = True
+        btnCourseEnrollment.Cursor = Cursors.Hand
+        btnCourseEnrollment.Dock = DockStyle.Top
+        btnCourseEnrollment.FlatAppearance.BorderSize = 0
+        btnCourseEnrollment.FlatStyle = FlatStyle.Flat
+        btnCourseEnrollment.Font = New Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnCourseEnrollment.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        btnCourseEnrollment.Location = New Point(0, 182)
+        btnCourseEnrollment.Name = "btnCourseEnrollment"
+        btnCourseEnrollment.Size = New Size(249, 37)
+        btnCourseEnrollment.TabIndex = 1
+        btnCourseEnrollment.Text = "Course Enrollment"
+        btnCourseEnrollment.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnCourseEnrollment.UseVisualStyleBackColor = True
         ' 
         ' btnStudentEnrollment
         ' 
@@ -190,10 +198,10 @@ Partial Class CourseEnrollment
         ' Panel1
         ' 
         Panel1.BackColor = Color.FromArgb(CByte(36), CByte(41), CByte(62))
-        Panel1.Controls.Add(Button1)
+        Panel1.Controls.Add(btnPaymentManagement)
         Panel1.Controls.Add(btnExit)
-        Panel1.Controls.Add(btnDelete)
-        Panel1.Controls.Add(btnUpdate)
+        Panel1.Controls.Add(btnGradingForm)
+        Panel1.Controls.Add(btnCourseEnrollment)
         Panel1.Controls.Add(btnStudentEnrollment)
         Panel1.Controls.Add(Panel2)
         Panel1.Location = New Point(31, 22)
@@ -205,10 +213,69 @@ Partial Class CourseEnrollment
         ' 
         Panel3.BackColor = Color.FromArgb(CByte(44), CByte(53), CByte(79))
         Panel3.BorderStyle = BorderStyle.Fixed3D
+        Panel3.Controls.Add(btnSubmit)
+        Panel3.Controls.Add(DateTimePicker1)
+        Panel3.Controls.Add(lblStatus)
+        Panel3.Controls.Add(Label2)
+        Panel3.Controls.Add(cmbCourses)
+        Panel3.Controls.Add(txtStudentId)
         Panel3.Location = New Point(316, 126)
         Panel3.Name = "Panel3"
         Panel3.Size = New Size(772, 397)
         Panel3.TabIndex = 1
+        ' 
+        ' btnSubmit
+        ' 
+        btnSubmit.Location = New Point(95, 242)
+        btnSubmit.Name = "btnSubmit"
+        btnSubmit.Size = New Size(94, 29)
+        btnSubmit.TabIndex = 5
+        btnSubmit.Text = "Submit"
+        btnSubmit.UseVisualStyleBackColor = True
+        ' 
+        ' DateTimePicker1
+        ' 
+        DateTimePicker1.Location = New Point(95, 178)
+        DateTimePicker1.Name = "DateTimePicker1"
+        DateTimePicker1.Size = New Size(365, 27)
+        DateTimePicker1.TabIndex = 4
+        ' 
+        ' lblStatus
+        ' 
+        lblStatus.AutoSize = True
+        lblStatus.Font = New Font("Microsoft Sans Serif", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblStatus.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        lblStatus.Location = New Point(677, 332)
+        lblStatus.Name = "lblStatus"
+        lblStatus.Size = New Size(20, 29)
+        lblStatus.TabIndex = 3
+        lblStatus.Text = "."
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Font = New Font("Microsoft Sans Serif", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        Label2.Location = New Point(95, 41)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(185, 29)
+        Label2.TabIndex = 2
+        Label2.Text = "Select Course "
+        ' 
+        ' cmbCourses
+        ' 
+        cmbCourses.FormattingEnabled = True
+        cmbCourses.Location = New Point(95, 119)
+        cmbCourses.Name = "cmbCourses"
+        cmbCourses.Size = New Size(365, 28)
+        cmbCourses.TabIndex = 1
+        ' 
+        ' txtStudentId
+        ' 
+        txtStudentId.Location = New Point(703, 12)
+        txtStudentId.Name = "txtStudentId"
+        txtStudentId.Size = New Size(51, 27)
+        txtStudentId.TabIndex = 0
         ' 
         ' Panel4
         ' 
@@ -238,6 +305,13 @@ Partial Class CourseEnrollment
         MySqlCommand1.EnableCaching = False
         MySqlCommand1.Transaction = Nothing
         ' 
+        ' MySqlCommand2
+        ' 
+        MySqlCommand2.CacheAge = 0
+        MySqlCommand2.Connection = Nothing
+        MySqlCommand2.EnableCaching = False
+        MySqlCommand2.Transaction = Nothing
+        ' 
         ' CourseEnrollment
         ' 
         AutoScaleDimensions = New SizeF(10F, 20F)
@@ -257,17 +331,19 @@ Partial Class CourseEnrollment
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
         Panel1.ResumeLayout(False)
+        Panel3.ResumeLayout(False)
+        Panel3.PerformLayout()
         Panel4.ResumeLayout(False)
         Panel4.PerformLayout()
         ResumeLayout(False)
     End Sub
     Friend WithEvents Label1 As Label
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents btnDelete As Button
-    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnGradingForm As Button
+    Friend WithEvents btnCourseEnrollment As Button
     Friend WithEvents btnStudentEnrollment As Button
     Friend WithEvents btnExit As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnPaymentManagement As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents pnlNav As Panel
     Friend WithEvents Panel1 As Panel
@@ -277,5 +353,12 @@ Partial Class CourseEnrollment
     Friend WithEvents Label9 As Label
     Friend WithEvents lbl_userName As Label
     Friend WithEvents MySqlCommand1 As MySql.Data.MySqlClient.MySqlCommand
+    Friend WithEvents Label2 As Label
+    Friend WithEvents cmbCourses As ComboBox
+    Friend WithEvents txtStudentId As TextBox
+    Friend WithEvents MySqlCommand2 As MySql.Data.MySqlClient.MySqlCommand
+    Friend WithEvents btnSubmit As Button
+    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents lblStatus As Label
 
 End Class

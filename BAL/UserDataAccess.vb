@@ -12,17 +12,17 @@ Namespace BAL
         Public Function InsertUser(user As Accounts) As Integer
             Dim cmd As New MySqlCommand()
             cmd.CommandType = CommandType.Text
-            cmd.CommandText = "INSERT INTO Users (username, password, role_id) " &
-                              "VALUES (@Username, @Password, @RoleId)"
+            cmd.CommandText = "INSERT INTO Users (username, password) " &
+                              "VALUES (@Username, @Password)"
 
             ' Add parameters to prevent SQL injection
             cmd.Parameters.AddWithValue("@Username", user.Username)
             cmd.Parameters.AddWithValue("@Password", user.Password)
-            cmd.Parameters.AddWithValue("@RoleId", user.RoleId)
 
             ' Execute the command and return the number of affected rows
             Return db.ExeNonQuery(cmd)
         End Function
+
 
         ' View all user records from the Users table
         Public Function ViewUsers() As DataTable

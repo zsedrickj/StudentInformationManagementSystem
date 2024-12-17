@@ -25,10 +25,9 @@ Partial Class Signup
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Signup))
         MySqlCommand1 = New MySql.Data.MySqlClient.MySqlCommand()
         Panel1 = New Panel()
-        Label5 = New Label()
+        btnBack = New Button()
         Label4 = New Label()
         Label6 = New Label()
-        cmbRole = New ComboBox()
         Label3 = New Label()
         Label2 = New Label()
         btnSignUp = New Button()
@@ -37,7 +36,6 @@ Partial Class Signup
         Label1 = New Label()
         PictureBox1 = New PictureBox()
         MySqlCommand2 = New MySql.Data.MySqlClient.MySqlCommand()
-        btnBack = New Button()
         Panel1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -53,10 +51,8 @@ Partial Class Signup
         ' 
         Panel1.BackColor = Color.FromArgb(CByte(36), CByte(41), CByte(62))
         Panel1.Controls.Add(btnBack)
-        Panel1.Controls.Add(Label5)
         Panel1.Controls.Add(Label4)
         Panel1.Controls.Add(Label6)
-        Panel1.Controls.Add(cmbRole)
         Panel1.Controls.Add(Label3)
         Panel1.Controls.Add(Label2)
         Panel1.Controls.Add(btnSignUp)
@@ -69,16 +65,14 @@ Partial Class Signup
         Panel1.Size = New Size(1090, 513)
         Panel1.TabIndex = 0
         ' 
-        ' Label5
+        ' btnBack
         ' 
-        Label5.AutoSize = True
-        Label5.Font = New Font("Microsoft Sans Serif", 10.2F)
-        Label5.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label5.Location = New Point(559, 225)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(43, 20)
-        Label5.TabIndex = 14
-        Label5.Text = "Role"
+        btnBack.Location = New Point(685, 254)
+        btnBack.Name = "btnBack"
+        btnBack.Size = New Size(94, 29)
+        btnBack.TabIndex = 15
+        btnBack.Text = "Back"
+        btnBack.UseVisualStyleBackColor = True
         ' 
         ' Label4
         ' 
@@ -101,14 +95,6 @@ Partial Class Signup
         Label6.Size = New Size(86, 20)
         Label6.TabIndex = 12
         Label6.Text = "Username"
-        ' 
-        ' cmbRole
-        ' 
-        cmbRole.FormattingEnabled = True
-        cmbRole.Location = New Point(559, 248)
-        cmbRole.Name = "cmbRole"
-        cmbRole.Size = New Size(271, 28)
-        cmbRole.TabIndex = 10
         ' 
         ' Label3
         ' 
@@ -134,7 +120,7 @@ Partial Class Signup
         ' 
         ' btnSignUp
         ' 
-        btnSignUp.Location = New Point(559, 300)
+        btnSignUp.Location = New Point(559, 254)
         btnSignUp.Name = "btnSignUp"
         btnSignUp.Size = New Size(94, 29)
         btnSignUp.TabIndex = 6
@@ -184,15 +170,6 @@ Partial Class Signup
         MySqlCommand2.EnableCaching = False
         MySqlCommand2.Transaction = Nothing
         ' 
-        ' btnBack
-        ' 
-        btnBack.Location = New Point(683, 300)
-        btnBack.Name = "btnBack"
-        btnBack.Size = New Size(94, 29)
-        btnBack.TabIndex = 15
-        btnBack.Text = "Back"
-        btnBack.UseVisualStyleBackColor = True
-        ' 
         ' Signup
         ' 
         AutoScaleDimensions = New SizeF(10F, 20F)
@@ -220,8 +197,6 @@ Partial Class Signup
     Friend WithEvents btnSignUp As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents cmbRole As ComboBox
-    Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents MySqlCommand2 As MySql.Data.MySqlClient.MySqlCommand

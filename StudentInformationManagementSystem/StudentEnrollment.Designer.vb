@@ -422,12 +422,13 @@ Partial Class StudentEnrollment
         txtAddress.Size = New Size(267, 27)
         txtAddress.TabIndex = 6
         ' 
-        ' txtPhoneNumber
+        ' txtPhoneNumber    
         ' 
         txtPhoneNumber.Location = New Point(82, 238)
         txtPhoneNumber.Name = "txtPhoneNumber"
         txtPhoneNumber.Size = New Size(267, 27)
         txtPhoneNumber.TabIndex = 4
+
         ' 
         ' txtEmail
         ' 

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BEL\BEL.vbproj" />
+    <ProjectReference Include="..\BEL\Models.vbproj" />
     <ProjectReference Include="..\DAL\DAL.vbproj" />
   </ItemGroup>
 

@@ -36,6 +36,7 @@ Partial Class Signup
         Label1 = New Label()
         PictureBox1 = New PictureBox()
         MySqlCommand2 = New MySql.Data.MySqlClient.MySqlCommand()
+        Label5 = New Label()
         Panel1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -50,6 +51,7 @@ Partial Class Signup
         ' Panel1
         ' 
         Panel1.BackColor = Color.FromArgb(CByte(36), CByte(41), CByte(62))
+        Panel1.Controls.Add(Label5)
         Panel1.Controls.Add(btnBack)
         Panel1.Controls.Add(Label4)
         Panel1.Controls.Add(Label6)
@@ -67,7 +69,7 @@ Partial Class Signup
         ' 
         ' btnBack
         ' 
-        btnBack.Location = New Point(685, 254)
+        btnBack.Location = New Point(689, 280)
         btnBack.Name = "btnBack"
         btnBack.Size = New Size(94, 29)
         btnBack.TabIndex = 15
@@ -79,7 +81,7 @@ Partial Class Signup
         Label4.AutoSize = True
         Label4.Font = New Font("Microsoft Sans Serif", 10.2F)
         Label4.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label4.Location = New Point(559, 174)
+        Label4.Location = New Point(559, 208)
         Label4.Name = "Label4"
         Label4.Size = New Size(83, 20)
         Label4.TabIndex = 13
@@ -90,7 +92,7 @@ Partial Class Signup
         Label6.AutoSize = True
         Label6.Font = New Font("Microsoft Sans Serif", 10.2F)
         Label6.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label6.Location = New Point(559, 121)
+        Label6.Location = New Point(559, 155)
         Label6.Name = "Label6"
         Label6.Size = New Size(86, 20)
         Label6.TabIndex = 12
@@ -120,7 +122,7 @@ Partial Class Signup
         ' 
         ' btnSignUp
         ' 
-        btnSignUp.Location = New Point(559, 254)
+        btnSignUp.Location = New Point(559, 280)
         btnSignUp.Name = "btnSignUp"
         btnSignUp.Size = New Size(94, 29)
         btnSignUp.TabIndex = 6
@@ -129,7 +131,7 @@ Partial Class Signup
         ' 
         ' txtPassword
         ' 
-        txtPassword.Location = New Point(559, 195)
+        txtPassword.Location = New Point(559, 231)
         txtPassword.Name = "txtPassword"
         txtPassword.Size = New Size(271, 27)
         txtPassword.TabIndex = 5
@@ -137,7 +139,7 @@ Partial Class Signup
         ' 
         ' txtUser
         ' 
-        txtUser.Location = New Point(559, 144)
+        txtUser.Location = New Point(559, 178)
         txtUser.Name = "txtUser"
         txtUser.Size = New Size(271, 27)
         txtUser.TabIndex = 4
@@ -145,11 +147,11 @@ Partial Class Signup
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Microsoft Sans Serif", 18F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
-        Label1.Location = New Point(559, 70)
+        Label1.Location = New Point(559, 108)
         Label1.Name = "Label1"
-        Label1.Size = New Size(118, 36)
+        Label1.Size = New Size(95, 29)
         Label1.TabIndex = 1
         Label1.Text = "Sign up"
         ' 
@@ -169,6 +171,17 @@ Partial Class Signup
         MySqlCommand2.Connection = Nothing
         MySqlCommand2.EnableCaching = False
         MySqlCommand2.Transaction = Nothing
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label5.ForeColor = Color.FromArgb(CByte(244), CByte(245), CByte(252))
+        Label5.Location = New Point(559, 70)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(107, 29)
+        Label5.TabIndex = 16
+        Label5.Text = "Student "
         ' 
         ' Signup
         ' 
@@ -201,5 +214,6 @@ Partial Class Signup
     Friend WithEvents Label6 As Label
     Friend WithEvents MySqlCommand2 As MySql.Data.MySqlClient.MySqlCommand
     Friend WithEvents btnBack As Button
+    Friend WithEvents Label5 As Label
 
 End Class

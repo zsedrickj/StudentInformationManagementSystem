@@ -57,8 +57,8 @@ Public Class Login
             If AdminLogin(userName, password) Then
                 MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ' Proceed with login logic (e.g., redirect to dashboard)
-                Dim studentEnrollment As New StudentEnrollment
-                studentEnrollment.Show()
+                Dim dashboard As New Dashboard
+                dashboard.Show()
                 Me.Hide()
             Else
                 If dt.Rows.Count > 0 Then
@@ -71,8 +71,8 @@ Public Class Login
                     If BCrypt.Net.BCrypt.Verify(password, storedHashedPassword) Then
                         MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         ' Proceed with login logic (e.g., redirect to dashboard)
-                        Dim studentEnrollment As New StudentEnrollment
-                        studentEnrollment.Show()
+                        Dim studentDashboard As New StudentDashboard
+                        studentDashboard.Show()
                         Me.Hide()
 
                     Else

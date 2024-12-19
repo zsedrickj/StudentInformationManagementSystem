@@ -36,7 +36,6 @@ Public Class StudentEnrollment
         Me.StartPosition = FormStartPosition.Manual
         Me.Location = New Point((Screen.PrimaryScreen.WorkingArea.Width - Me.Width) / 2, (Screen.PrimaryScreen.WorkingArea.Height - Me.Height) / 2)
         IsNullOrEmpty()
-        GetUserName()
         cmbGender.Items.Add("- Select Gender -")
         cmbGender.Items.Add("Male")
         cmbGender.Items.Add("Female")
@@ -52,19 +51,22 @@ Public Class StudentEnrollment
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As EventArgs) Handles btnEnroll.Click
 
+        ' Validate the input fields
         If Validation() = True Then
+            ' Create a new student object with values from the form controls
             Dim newStudent As New Students() With {
-       .FirstName = txtFirstName.Text, ' Assuming these are TextBox controls
-       .LastName = txtLastName.Text,
-       .Email = txtEmail.Text,
-       .PhoneNumber = txtPhoneNumber.Text,
-       .DateOfBirth = dtpBirthday.Value, ' Assuming this is a DateTimePicker control
-       .Gender = cmbGender.SelectedItem.ToString(), ' Assuming this is a ComboBox control
-       .Address = txtAddress.Text,
-       .EnrollmentDate = Date.Now, ' Auto-set to current date
-       .ProgramId = CInt(cmbProgram.SelectedIndex), ' Assuming ProgramId is bound to a ComboBox
-       .DepartmentId = CInt(cmbDepartment.SelectedIndex) ' Assuming DepartmentId is bound to a ComboBox
-   }
+            .FirstName = txtFirstName.Text, ' Assuming these are TextBox controls
+            .LastName = txtLastName.Text,
+            .Email = txtEmail.Text,
+            .PhoneNumber = txtPhoneNumber.Text,
+            .DateOfBirth = dtpBirthday.Value, ' Assuming this is a DateTimePicker control
+            .Gender = cmbGender.SelectedItem.ToString(), ' Assuming this is a ComboBox control
+            .Address = txtAddress.Text,
+            .EnrollmentDate = Date.Now, ' Auto-set to current date
+            .ProgramId = CInt(cmbProgram.SelectedIndex), ' Assuming ProgramId is bound to a ComboBox
+            .DepartmentId = CInt(cmbDepartment.SelectedIndex), ' Assuming DepartmentId is bound to a ComboBox
+            .CourseId = studentAccess.GetCourseIdByCourseName(cmbCourse.SelectedItem) ' Assuming CourseId is bound to a ComboBox for course selection
+        }
 
             ' Insert the student into the database
             Dim rowsAffected As Integer = studentAccess.InsertStudent(newStudent)
@@ -73,11 +75,9 @@ Public Class StudentEnrollment
             If rowsAffected > 0 Then
                 MessageBox.Show("Student enrolled successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ResetForm()
-
             Else
                 MessageBox.Show("An error occurred while enrolling the student.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-
         End If
 
 
@@ -96,19 +96,8 @@ Public Class StudentEnrollment
         ' Otherwise, close the application
         Application.Exit()
     End Sub
-    Private Sub btnStudentEnrollment_Click(sender As Object, e As EventArgs) Handles btnStudentEnrollment.Click
 
 
-    End Sub
-    Private Sub btnCourseEnrollment_Click(sender As Object, e As EventArgs) Handles btnCourseEnrollment.Click
-
-        DataBinding()
-
-        Dim courseEnrollment As New CourseEnrollment(student)
-        courseEnrollment.Show()
-        Me.Hide()
-
-    End Sub
     Private Sub cmbDepartment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDepartment.SelectedIndexChanged
         ' Check if a valid item is selected
         If cmbDepartment.SelectedIndex = -1 OrElse cmbDepartment.SelectedItem.ToString() = "- Select Department -" Then
@@ -117,6 +106,12 @@ Public Class StudentEnrollment
             cmbProgram.Items.Add("- Select Program -")
             cmbProgram.SelectedIndex = 0
             cmbProgram.Enabled = False
+
+            ' Reset the Course ComboBox
+            cmbCourse.Items.Clear()
+            cmbCourse.Items.Add("- Select Course -")
+            cmbCourse.SelectedIndex = 0
+            cmbCourse.Enabled = False
             Return
         End If
 
@@ -128,24 +123,39 @@ Public Class StudentEnrollment
 
         ' Validate the department ID
         If departmentID > 0 Then
-            ' Fetch program names for the selected department
+            ' --- Populate Program ComboBox ---
             Dim programNames As List(Of String) = studentAccess.GetProgramNamesByDepartment(departmentID)
 
-            ' Populate the Program ComboBox
             cmbProgram.Items.Clear()
             cmbProgram.Items.Add("- Select Program -")
             cmbProgram.Items.AddRange(programNames.ToArray())
             cmbProgram.SelectedIndex = 0
             cmbProgram.Enabled = True
+
+            ' --- Populate Course ComboBox ---
+            Dim courseNames As List(Of String) = studentAccess.GetCourseNamesByDepartment(departmentID)
+
+            cmbCourse.Items.Clear()
+            cmbCourse.Items.Add("- Select Course -")
+            cmbCourse.Items.AddRange(courseNames.ToArray())
+            cmbCourse.SelectedIndex = 0
+            cmbCourse.Enabled = True
         Else
             ' Handle invalid department ID
             MessageBox.Show("Invalid department selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            ' Reset the Program ComboBox
             cmbProgram.Items.Clear()
             cmbProgram.Items.Add("- Select Program -")
             cmbProgram.SelectedIndex = 0
             cmbProgram.Enabled = False
-        End If
 
+            ' Reset the Course ComboBox
+            cmbCourse.Items.Clear()
+            cmbCourse.Items.Add("- Select Course -")
+            cmbCourse.SelectedIndex = 0
+            cmbCourse.Enabled = False
+        End If
     End Sub
     Private Function Validation() As Boolean
 
@@ -268,6 +278,28 @@ Public Class StudentEnrollment
             MessageBox.Show("Error populating Program ComboBox: " & ex.Message)
         End Try
     End Sub
+    Public Sub PopulateCourseComboBox(cmbDepartment As ComboBox, departmentID As Integer)
+        Try
+            ' Retrieve course names for the selected department
+            Dim courseNames As List(Of String) = studentAccess.GetCourseNamesByDepartment(departmentID)
+
+            ' Clear existing items in the ComboBox
+            cmbCourse.Items.Clear()
+
+            ' Add each course name to the ComboBox
+            For Each courseName As String In courseNames
+                cmbCourse.Items.Add(courseName)
+            Next
+
+            ' Set the first item as selected, if available
+            If cmbCourse.Items.Count > 0 Then
+                cmbCourse.SelectedIndex = 0
+            End If
+        Catch ex As Exception
+            ' Handle any errors
+            MessageBox.Show("Error populating Course ComboBox: " & ex.Message)
+        End Try
+    End Sub
     Private Sub IsNullOrEmpty()
         If Not String.IsNullOrEmpty(storedFirstName) Then
             txtFirstName.Text = storedFirstName
@@ -318,26 +350,6 @@ Public Class StudentEnrollment
         cmbGender.DataBindings.Add("SelectedItem", student, "Gender")
         cmbProgram.DataBindings.Add("SelectedValue", student, "ProgramId")
     End Sub
-    Public Sub GetUserName()
-        ' Get the username input from the Login form
-        Dim loggedInUserName As String = Login.UserNameInput.Trim() ' Assuming Login is the current instance
-
-        ' Create an instance of UserDataAccess
-        Dim userAccess As New UserDataAccess()
-
-        ' Fetch user data based on the username
-        Dim userTable As DataTable = userAccess.GetUser(loggedInUserName)
-
-        ' Check if user data is retrieved
-        If userTable IsNot Nothing AndAlso userTable.Rows.Count > 0 Then
-            ' Update the label with the username
-            lbl_userName.Text = "Welcome " & userTable.Rows(0)("username").ToString() & "!"
-        Else
-            ' Handle case where no user data is found
-            lbl_userName.Text = "User not found!"
-        End If
-    End Sub
-
     Private Sub ResetForm()
         txtFirstName.Clear()
         txtLastName.Clear()
@@ -350,4 +362,16 @@ Public Class StudentEnrollment
         dtpBirthday.Value = Date.Now
     End Sub
 
+    Private Sub btnCourseForm_Click(sender As Object, e As EventArgs) Handles btnCourseForm.Click
+        Dim courseForm As New CourseEnrollment
+        courseForm.Show()
+        Me.Hide()
+
+    End Sub
+
+    Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
+        Dim dashboard As New Dashboard
+        dashboard.Show()
+        Me.Hide()
+    End Sub
 End Class

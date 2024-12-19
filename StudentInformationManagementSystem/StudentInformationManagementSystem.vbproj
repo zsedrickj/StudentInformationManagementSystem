@@ -20,11 +20,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BAL\BAL.vbproj" />
-    <ProjectReference Include="..\BEL\BEL.vbproj" />
+    <ProjectReference Include="..\BEL\Models.vbproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CourseEnrollment.vb" />
+    <Compile Update="Student\CourseForm.vb" />
+    <Compile Update="Student\ProgramForm.vb" />
+    <Compile Update="Student\StudentDashboard.vb" />
+    <Compile Update="Student\DepartmentForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UpdateForm.vb" />
     <Compile Update="Signup.vb" />
     <Compile Update="My Project\Application.Designer.vb">
       <DesignTime>True</DesignTime>
@@ -37,6 +43,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="Login.vb" />
+    <Compile Update="GradingForm.vb" />
+    <Compile Update="Dashboard.vb" />
   </ItemGroup>
 
   <ItemGroup>
